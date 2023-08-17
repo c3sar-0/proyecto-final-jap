@@ -1,31 +1,35 @@
 body {
-
     background-color: #f8f9fa;
     text-align: center;
     font-family: sans-serif;
-    margin-top: 50px;
     padding-left: 400px;
     padding-right: 400px;
+    margin-top: 17px;
 }
 
 img {
-    width: 400px;
+    width: 330px;
+}
+
+p {
+    font-size: 27px;
+    margin-top: 30;
 }
 
 form{
     background-color: #f8f9fa; 
-    padding-bottom: 40px;
+    padding-bottom: 28px;
     border: 3.5px solid black;
-}
-
-a {
-    font-size: small;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .divInput input {
     border-radius: 5px;
-    padding: 12px 70px;
+    padding: 10px 70px;
     border: 1px solid #ccc;
+    text-align: center;
 }
 
 .divInput input:focus {
@@ -36,7 +40,7 @@ a {
 }
 
 .divInput{
-    padding: 10px;
+    padding: 6px;
 }
 
 input::placeholder {
@@ -44,10 +48,16 @@ input::placeholder {
     color: rgb(127, 127, 127);
   }
 
+#divCheckBox {
+    color: rgb(125, 125, 125);
+
+}
+
 
 button{
     border-radius: 5px;
     padding: 15px 25px;
     background-color: #aad4f9;
     font-weight: bold;
+    margin-top: 13px;
 }
