@@ -12,8 +12,9 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
     
-    
+    // Se agrega un condicional, en caso de que el usuario no esté logeado, se redirecciona al interfaz del login
+
     if (!sessionStorage.getItem("estaLogeado")){
         window.location.href="login.html"
-    }
+    };
 });
