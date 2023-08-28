@@ -12,6 +12,7 @@ formulario.addEventListener("submit", function(event){
 
 /*Funcion que almacenacena la información de que el usuario está logeado al enviar el formulario*/
     localStorage.setItem("estaLogeado", true);
+//Guardo el valor del mail en un item "correo"
     localStorage.setItem("correo",mail.value);
 /*Redirección a la página de inicio luego del envío del formulario*/
     window.location.href="index.html"
