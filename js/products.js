@@ -1,20 +1,20 @@
-/*Se crea una constante con el link donde se va a realizar el fetch*/
+/*(E1)Se crea una constante con el link donde se va a realizar el fetch*/
 const carCategoryUrl =
   "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem('catID') + ".json";
-/*Se crea una constante para tomar a la etiqueta*/
+/*(E1)Se crea una constante para tomar a la etiqueta*/
 const carsContainer = document.getElementById("cars-container");
-//Traemos al JSON para poder acceder a los precios de cada item y poder ordenarlos. 
-let prodPorCat = getJSONData(carCategoryUrl).then((res) => {
-  if (res.status == "ok") {
-    return res.data.products;
-  }
-});
+//(E2)se crea variable para mantener la lista de productos
+let currentProductsArr = [];
+//(E2) Se crea variable para mantener lista de productos filtrados
+let filteredProductsArr= [];
+//(E2) nombre de la categoria
+let nameCategory;
 
-const showProducts = (/*funcionOrdenar*/) => {
-//Se utiliza la funcion "getJSONData" para hacer la peticion a la URL
-//=>Evaluamos la respuesta y vemos que los datos se obtuvieron correctamente
-//=>En caso de que sea positiva la evaluacion, agregamos un primer fragmento a la etiqueta anteriormente llamada
+//(E2) se crea una const que tiene una funcion flecha con un paramerto el cual me crea el cuerpo de products.html
+const showProducts = (productsArr) => {
+//(E1)agregamos un primer fragmento a la etiqueta anteriormente llamada
 //=>Se recorre con un forEach en la parte de "products" de los datos obtenidos, para asi agregarlos posteriormente a la etiqueta llamada
+<<<<<<< Updated upstream
   getJSONData(carCategoryUrl).then((res) => {
     if (res.status == "ok") {
       carsContainer.innerHTML += `
@@ -58,6 +58,11 @@ const showProducts = (/*funcionOrdenar*/) => {
       </div>
       `;
       res.data.product.forEach((product) => {
+=======
+    carsContainer.innerHTML= "";
+      document.getElementById("catName").innerHTML = nameCategory;
+        productsArr.forEach((product) => {
+>>>>>>> Stashed changes
         const html = `
         <div class="list-group-item list-group-item-action cursor-active">
           <div class="row">
@@ -79,10 +84,5 @@ const showProducts = (/*funcionOrdenar*/) => {
         `;
         carsContainer.innerHTML += html;
       });
-      console.log(res.data);
-    }
-  });
 };
-
-showProducts();
 
