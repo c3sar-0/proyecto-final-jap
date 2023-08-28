@@ -17,12 +17,12 @@ const showProducts = (/*funcionOrdenar*/) => {
 //=>Se recorre con un forEach en la parte de "products" de los datos obtenidos, para asi agregarlos posteriormente a la etiqueta llamada
   getJSONData(carCategoryUrl).then((res) => {
     if (res.status == "ok") {
-      /*carsContainer.innerHTML += `
+      carsContainer.innerHTML += `
       <center>
         <h1>Productos</h1>
           <h3>Verás aquí todos los productos de la categoría ${res.data.catName}</h3>   
       </center>
-      `;*/
+      `;
       res.data.product.forEach((product) => {
         const html = `
         <div class="list-group-item list-group-item-action cursor-active">
