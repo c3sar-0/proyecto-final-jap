@@ -87,9 +87,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
     showProducts(currentProductsArr);
     filteredProductsArr = currentProductsArr.slice();
   });
-});
-//Agrega el correo en el nav
-correoNav();
+
+  //Agrega el correo en el nav
+  correoNav();
 
   //(E2) Se crea un evento para el botón
   document.getElementById("search").addEventListener("click", () => {
@@ -119,5 +119,5 @@ correoNav();
       }
     });
     showProducts(filteredProductsArr);
+  });
 });
-
