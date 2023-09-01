@@ -44,4 +44,83 @@ const showProducts = () => {
   });
 };
 
+<<<<<<< Updated upstream
 showProducts();
+=======
+//(E2)Se cambia el fragmento de "getJSONData" a este sector
+//(E1)Se utiliza la funcion "getJSONData" para hacer la peticion a la URL
+//=>Evaluamos la respuesta y vemos que los datos se obtuvieron correctamente
+//=>En caso de que sea positiva la evaluacion
+document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(carCategoryUrl).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      currentProductsArr = resultObj.data.products;
+      nameCategory = resultObj.data.catName;
+      filteredProductsArr = currentProductsArr.slice();
+      showProducts(currentProductsArr);
+    }
+  });
+
+  //(E2)cuando se le da click a la etiqueta designada, se ordena en orden ascendiente (precio)
+  document.getElementById("sortAsc").addEventListener("click", () => {
+    filteredProductsArr.sort((a, b) => a.cost - b.cost);
+    showProducts(filteredProductsArr);
+  });
+  //(E2)cuando se le da click a la etiqueta designada, se ordena en orden descendiente (precio)
+  document.getElementById("sortDesc").addEventListener("click", () => {
+    filteredProductsArr.sort((a, b) => b.cost - a.cost);
+    showProducts(filteredProductsArr);
+  });
+  //(E2)cuando se le da click a la etiqueta designada, se ordena de menos vendidos a mas vendidos
+  document.getElementById("sortByCount").addEventListener("click", () => {
+    filteredProductsArr.sort((a, b) => b.soldCount - a.soldCount);
+    showProducts(filteredProductsArr);
+  });
+  //(E2)cuando se le da click a la etiqueta designada, filtro segun un rango de precios
+  document.getElementById("rangeFilterCount").addEventListener("click", () => {
+    let min = document.getElementById("rangeFilterCountMin").value;
+    let max = document.getElementById("rangeFilterCountMax").value;
+
+    filteredProductsArr = currentProductsArr.filter(
+      (product) => product.cost >= min && product.cost <= max
+    );
+    showProducts(filteredProductsArr);
+  });
+  //(E2) cuando se le da click a la etiqueta designada, limpia los filtros
+  document.getElementById("clearRangeFilter").addEventListener("click", () => {
+    showProducts(currentProductsArr);
+    filteredProductsArr = currentProductsArr.slice();
+  });
+
+
+  //(E2) Se crea un evento para el botón
+  document.getElementById("search").addEventListener("click", () => {
+    filteredProductsArr = [];
+
+    currentProductsArr.filter(function (objeto) {
+      if (
+        objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
+        objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
+      ) {
+        filteredProductsArr.push(objeto);
+      }
+    });
+    showProducts(filteredProductsArr);
+  });
+
+  //(E2) Se crea el evento para la barra de navegación
+  document.getElementById("navbar").addEventListener("input", () => {
+    filteredProductsArr = [];
+
+    currentProductsArr.filter(function (objeto) {
+      if (
+        objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
+        objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
+      ) {
+        filteredProductsArr.push(objeto);
+      }
+    });
+    showProducts(filteredProductsArr);
+  });
+});
+>>>>>>> Stashed changes
