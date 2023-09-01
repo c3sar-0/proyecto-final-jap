@@ -91,4 +91,33 @@ document.addEventListener("DOMContentLoaded", function (e) {
 //Agrega el correo en el nav
 correoNav();
 
+  //(E2) Se crea un evento para el botón
+  document.getElementById("search").addEventListener("click", () => {
+    filteredProductsArr = [];
 
+    currentProductsArr.filter(function (objeto) {
+      if (
+        objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
+        objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
+      ) {
+        filteredProductsArr.push(objeto);
+      }
+    });
+    showProducts(filteredProductsArr);
+  });
+
+  //(E2) Se crea el evento para la barra de navegación
+  document.getElementById("navbar").addEventListener("input", () => {
+    filteredProductsArr = [];
+
+    currentProductsArr.filter(function (objeto) {
+      if (
+        objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
+        objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
+      ) {
+        filteredProductsArr.push(objeto);
+      }
+    });
+    showProducts(filteredProductsArr);
+  });
+});
