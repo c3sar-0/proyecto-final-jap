@@ -119,5 +119,5 @@ correoNav();
       }
     });
     showProducts(filteredProductsArr);
-  });
 });
+
