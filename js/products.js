@@ -13,7 +13,7 @@ let filteredProductsArr = [];
 //(E2) nombre de la categoria
 let nameCategory;
 //(E2) Se crea variable para guardar el filtro del navbar
-let filteredProductsArr1 = [];
+let searchProductsArr = [];
 
 //(E2) se crea una const que tiene una funcion flecha con un paramerto el cual me crea el cuerpo de products.html
 const showProducts = (productsArr) => {
@@ -44,6 +44,23 @@ const showProducts = (productsArr) => {
   });
 };
 
+const searchProducts = (array) => {
+  if (navbar.value == "") {
+    return filteredProductsArr.slice();
+  } else {
+    return array.filter((product) =>
+      product.name
+        .toLowerCase()
+        .includes(
+          navbar.value.toLowerCase() ||
+            product.description
+              .toLowerCase()
+              .includes(navbar.value.toLowerCase())
+        )
+    );
+  }
+};
+
 //(E2)Se cambia el fragmento de "getJSONData" a este sector
 //(E1)Se utiliza la funcion "getJSONData" para hacer la peticion a la URL
 //=>Evaluamos la respuesta y vemos que los datos se obtuvieron correctamente
@@ -54,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       currentProductsArr = resultObj.data.products;
       nameCategory = resultObj.data.catName;
       filteredProductsArr = currentProductsArr.slice();
+      searchProductsArr = currentProductsArr.slice();
       showProducts(currentProductsArr);
     }
   });
@@ -79,23 +97,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
     let min = document.getElementById("rangeFilterCountMin").value;
     let max = document.getElementById("rangeFilterCountMax").value;
 
-     //(E2) Arreglo Desafio
-
-    if (filteredProductsArr1 == "") {
-          filteredProductsArr = currentProductsArr.filter(
-            (product) => product.cost >= min && product.cost <= max)
-            showProducts(filteredProductsArr);
-    }else {
-      filteredProductsArr = filteredProductsArr1.filter(
-        (product) => product.cost >= min && product.cost <= max)
-        showProducts(filteredProductsArr);
-    }
-    
+    //(E2) Arreglo Desafio
+    filteredProductsArr = searchProductsArr.filter(
+      (product) => product.cost >= min && product.cost <= max
+    );
+    showProducts(filteredProductsArr);
   });
   //(E2) cuando se le da click a la etiqueta designada, limpia los filtros
   document.getElementById("clearRangeFilter").addEventListener("click", () => {
-    showProducts(currentProductsArr);
     filteredProductsArr = currentProductsArr.slice();
+    searchProductsArr = searchProducts(currentProductsArr);
+    showProducts(searchProductsArr);
   });
 
   //Agrega el correo en el nav
@@ -103,17 +115,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
   //(E2) Se crea el evento para la barra de navegación
   document.getElementById("navbar").addEventListener("input", () => {
-  //(E2) Arreglo Desafio
-    filteredProductsArr1 = [];
-
-    currentProductsArr.filter(function (objeto) {
-      if (
-        objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
-        objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
-      ) {
-        filteredProductsArr1.push(objeto);
-      }
-    });
-    showProducts(filteredProductsArr1);
+    //(E2) Arreglo Desafio
+    searchProductsArr = searchProducts(filteredProductsArr);
+    showProducts(searchProductsArr);
   });
 });
