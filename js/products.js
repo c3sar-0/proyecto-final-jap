@@ -9,12 +9,8 @@ const carsContainer = document.getElementById("cars-container");
 //(E2)se crea variable para mantener la lista de productos
 let productsArr = [];
 let currentProductsArr = [];
-//(E2) Se crea variable para mantener lista de productos filtrados
-let filteredProductsArr = [];
 //(E2) nombre de la categoria
 let nameCategory;
-//(E2) Se crea variable para guardar el filtro del navbar
-let searchProductsArr = [];
 
 //(E2) se crea una const que tiene una funcion flecha con un paramerto el cual me crea el cuerpo de products.html
 const showProducts = () => {
