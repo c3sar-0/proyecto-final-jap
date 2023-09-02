@@ -12,6 +12,8 @@ let currentProductsArr = [];
 let filteredProductsArr = [];
 //(E2) nombre de la categoria
 let nameCategory;
+//(E2) Se crea variable para guardar el filtro del navbar
+let filteredProductsArr1 = [];
 
 //(E2) se crea una const que tiene una funcion flecha con un paramerto el cual me crea el cuerpo de products.html
 const showProducts = (productsArr) => {
@@ -77,10 +79,18 @@ document.addEventListener("DOMContentLoaded", function (e) {
     let min = document.getElementById("rangeFilterCountMin").value;
     let max = document.getElementById("rangeFilterCountMax").value;
 
-    filteredProductsArr = currentProductsArr.filter(
-      (product) => product.cost >= min && product.cost <= max
-    );
-    showProducts(filteredProductsArr);
+     //(E2) Arreglo Desafio
+
+    if (filteredProductsArr1 == "") {
+          filteredProductsArr = currentProductsArr.filter(
+            (product) => product.cost >= min && product.cost <= max)
+            showProducts(filteredProductsArr);
+    }else {
+      filteredProductsArr = filteredProductsArr1.filter(
+        (product) => product.cost >= min && product.cost <= max)
+        showProducts(filteredProductsArr);
+    }
+    
   });
   //(E2) cuando se le da click a la etiqueta designada, limpia los filtros
   document.getElementById("clearRangeFilter").addEventListener("click", () => {
@@ -91,33 +101,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
   //Agrega el correo en el nav
   correoNav();
 
-  //(E2) Se crea un evento para el botón
-  document.getElementById("search").addEventListener("click", () => {
-    filteredProductsArr = [];
-
-    currentProductsArr.filter(function (objeto) {
-      if (
-        objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
-        objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
-      ) {
-        filteredProductsArr.push(objeto);
-      }
-    });
-    showProducts(filteredProductsArr);
-  });
-
   //(E2) Se crea el evento para la barra de navegación
   document.getElementById("navbar").addEventListener("input", () => {
-    filteredProductsArr = [];
+  //(E2) Arreglo Desafio
+    filteredProductsArr1 = [];
 
     currentProductsArr.filter(function (objeto) {
       if (
         objeto.name.toLowerCase().includes(navbar.value.toLowerCase()) ||
         objeto.description.toLowerCase().includes(navbar.value.toLowerCase())
       ) {
-        filteredProductsArr.push(objeto);
+        filteredProductsArr1.push(objeto);
       }
     });
-    showProducts(filteredProductsArr);
+    showProducts(filteredProductsArr1);
   });
 });
