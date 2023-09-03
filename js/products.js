@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       sortProductsAsc();
       currentProductsArr = productsArr.slice();
 
-      showProducts(currentProductsArr);
+      showProducts();
     }
   });
 
@@ -111,33 +111,34 @@ document.addEventListener("DOMContentLoaded", function (e) {
   document.getElementById("sortAsc").addEventListener("click", () => {
     sortProductsAsc();
     updateCurrent();
-    showProducts(currentProductsArr);
+    showProducts();
   });
   //(E2)cuando se le da click a la etiqueta designada, se ordena en orden descendiente (precio)
   document.getElementById("sortDesc").addEventListener("click", () => {
     sortProductsDesc();
     updateCurrent();
-    showProducts(currentProductsArr);
+    showProducts();
   });
   //(E2)cuando se le da click a la etiqueta designada, se ordena de menos vendidos a mas vendidos
   document.getElementById("sortByCount").addEventListener("click", () => {
     sortProductsByCount();
     updateCurrent();
-    showProducts(currentProductsArr);
+    showProducts();
   });
 
   //(E2)cuando se le da click a la etiqueta designada, filtro segun un rango de precios
   document.getElementById("rangeFilterCount").addEventListener("click", () => {
     //(E2) Arreglo Desafio
     updateCurrent();
-    showProducts(currentProductsArr);
+    showProducts();
   });
   //(E2) cuando se le da click a la etiqueta designada, limpia el filtro de precio
   document.getElementById("clearRangeFilter").addEventListener("click", () => {
     min.value = "";
     max.value = "";
+    sortProductsAsc();
     updateCurrent();
-    showProducts(currentProductsArr);
+    showProducts();
   });
 
   //Agrega el correo en el nav
@@ -146,6 +147,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
   //(E2) Se crea el evento para la barra de navegación
   document.getElementById("navbar").addEventListener("input", () => {
     updateCurrent();
-    showProducts(currentProductsArr);
+    showProducts();
   });
 });
