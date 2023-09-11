@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 //id de div linea 40
 const divInfo = document.getElementById("product-info")
 
@@ -62,4 +60,3 @@ document.addEventListener("DOMContentLoaded",()=>
         }
     });
 })
->>>>>>> Stashed changes
