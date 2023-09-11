@@ -20,7 +20,8 @@ const showProducts = () => {
   carsContainer.innerHTML = "";
   document.getElementById("catName").innerHTML = nameCategory;
   currentProductsArr.forEach((product) => {
-    const html = ` 
+    const html = `
+    <div id="${product.id}" onclick="guardarProducto(id)">
         <div class="list-group-item list-group-item-action cursor-active"> 
           <div class="row"> 
             <div class="col-3"> 
@@ -36,7 +37,8 @@ const showProducts = () => {
               </div> 
             </div> 
           </div> 
-        </div> 
+        </div>
+     </div>
         `;
     carsContainer.innerHTML += html;
   });
@@ -150,3 +152,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
     showProducts();
   });
 });
+
+
+function guardarProducto(id)
+{
+  localStorage.setItem("idProduc",id)
+  window.location.href="product-info.html"
+};
