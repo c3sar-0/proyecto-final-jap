@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded",()=>
             divInfo.innerHTML += 
             `
                 <div>
-                    <h3 style="margin-top: 1.3rem;">${infoObj.data.name}</h3>
-                    <hr style="margin-top: 1.8rem;">
+                    <h3 id="nomProducto">${infoObj.data.name}</h3>
+                    <hr id="hrProductos">
                     <strong>Precio</strong>
                     <p>${infoObj.data.currency}${infoObj.data.cost}</p>
                     <strong>Descripción</strong>
@@ -29,11 +29,13 @@ document.addEventListener("DOMContentLoaded",()=>
             `;
             infoObj.data.images.forEach(img => 
             {
-                divInfo.innerHTML += `<img src= "${img}" style='width: 15rem; margin-top: 1.3rem;'>`
+                divInfo.innerHTML += `<img src= "${img}" id="imgProductos">`
             });    
         }
         console.log(infoObj);
     });
+
+    correoNav();
     
     //(E3)Accedemos al json de los comentarios
     //(E3)Con un forEach recorremos el array para poder mostrar los comentarios y puntajes de cada uno de los productos
@@ -42,12 +44,12 @@ document.addEventListener("DOMContentLoaded",()=>
     .then(infoObj=> {
         if(infoObj.status === "ok"){
             divInfo.innerHTML += `
-            <h4 style="margin-top: 3rem;">Comentarios</h4>`
+            <h4 id="tituloComentarios">Comentarios</h4>`
             infoObj.data.forEach(element => {
                 divInfo.innerHTML += `
-                <div>
+                <div id="comentario">
                     <br>
-                    <p>${element.user} - ${element.dateTime} - 
+                    <p><strong> ${element.user} </strong> - ${element.dateTime} - 
                         <span class="fa fa-star ${element.score >= 1 && "checked"}"></span>
                         <span class="fa fa-star ${element.score >= 2 && "checked"}"></span>
                         <span class="fa fa-star ${element.score >= 3 && "checked"}"></span>
@@ -60,3 +62,4 @@ document.addEventListener("DOMContentLoaded",()=>
         }
     });
 })
+

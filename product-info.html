@@ -31,6 +31,8 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <!--Se agrega el boton de iniciar sesión-->
+            <a id="login" class="nav-link" href="login.html">Iniciar sesión</a>
           </li>
         </ul>
       </div>
@@ -42,18 +44,22 @@
     </div>
     <div class="container">
       <form id="formPuntuacion">
-        <h4>Comentar</h4>
+        <h4 id="tituloComentar">Comentar</h4>
         <p>Tu opinión:</p>
         <textarea rows="3" cols="40"></textarea>
         <p>Tu puntuación:</p>
-        <select>
+        <div class="row col-2">
+        <select  id="numEstrellas">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+        </div>
+        <div class="row col-1" id="botonPuntuacion">
         <button type="button" class="btn btn-primary">Enviar</button>
+        </div>
       </form>
     </div>
   </main>
