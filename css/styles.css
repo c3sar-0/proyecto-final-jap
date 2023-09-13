@@ -189,13 +189,13 @@ a.custom-card:hover {
   color: orange;
 }
 
-#comentario {
+.comentario {
   border: rgba(216, 207, 207, 0.822) solid 0.1rem;
   border-radius: 0.3rem;
-  margin-bottom:  0.6rem;
+  margin-bottom: 0.6rem;
   padding-left: 0.6rem;
   padding-top: 0.3rem;
-  line-height:0.5em;
+  line-height: 0.5em;
 }
 
 #numEstrellas {
@@ -208,12 +208,13 @@ a.custom-card:hover {
   margin-left: -1.05rem;
 }
 
-#tituloComentarios, #tituloComentar {
+#tituloComentarios,
+#tituloComentar {
   margin-top: 3rem;
 }
 
-#imgProductos {
-  width: 18rem; 
+.imgProductos {
+  width: 18rem;
   margin-top: 1.3rem;
   margin-right: 2rem;
 }
@@ -232,6 +233,7 @@ a.custom-card:hover {
   cursor: pointer;
   transition: color 0.5s;
 }
+
 .rating {
   margin-top: -1rem;
 }
