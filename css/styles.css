@@ -225,3 +225,18 @@ a.custom-card:hover {
 #hrProductos {
   margin-top: 1.8rem;
 }
+
+.star {
+  color: grey;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+.rating {
+  margin-top: -1rem;
+}
+
+.star:hover,
+.star.checked {
+  color: goldenrod;
+}
