@@ -20,6 +20,8 @@ const showProducts = () => {
   carsContainer.innerHTML = "";
   document.getElementById("catName").innerHTML = nameCategory;
   currentProductsArr.forEach((product) => {
+    //(E3) creamos un div que tome el id del producto y lo agrega como nombre del id de la etiqueta. 
+    //Se le agrega el atributo onClick donde se llama a la función guardarProducto. 
     const html = `
     <div id="${product.id}" onclick="guardarProducto(id)">
         <div class="list-group-item list-group-item-action cursor-active"> 
@@ -153,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 });
 
-
+//(E3) función que toma el id como parámetro y lo agrega al local Storage, además, redirecciona al product-info.html
 function guardarProducto(id)
 {
   localStorage.setItem("idProduc",id)
