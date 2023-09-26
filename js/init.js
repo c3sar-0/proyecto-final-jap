@@ -40,18 +40,6 @@ let getJSONData = function (url) {
     });
 };
 //Agrega el correo en el nav
-<<<<<<< Updated upstream
-function correoNav(){
-    if (!localStorage.getItem("estaLogeado")){
-        window.location.href="login.html"
-    };
-    
-    //En caso de que haya un correo ingresado, se cambia el texto de "Iniciar Sesion" a el valor del correo.
-    const mostrarLogin = document.getElementById('login');
-    if(localStorage.getItem('correo')){
-        mostrarLogin.innerText = localStorage.getItem('correo');
-    }
-=======
 function correoNav() {
   if (!localStorage.getItem("estaLogeado")) {
     window.location.href = "login.html";
@@ -117,5 +105,4 @@ function correoNav() {
     e.preventDefault();
     cambiarModoActual();
   });
->>>>>>> Stashed changes
 };
