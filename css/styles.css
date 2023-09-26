@@ -243,7 +243,22 @@ a.custom-card:hover {
   color: goldenrod;
 }
 
-body.darkmode {
-  background-color: rgb(51, 46, 46);
+body.dark {
+  background-color: #212529;
   color: white;
+}
+
+body.dark .list-group-item{
+  background-color: #3b3e42;
+  color: #fff;
+}
+
+body.dark .comentario {
+  background-color: #3b3e42;
+  color: #fff;
+}
+
+body.dark .card {
+  background-color: #3b3e42;
+  color: #fff;
 }

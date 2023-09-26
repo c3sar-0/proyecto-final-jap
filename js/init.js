@@ -66,6 +66,30 @@ function correoNav() {
       </div>`;
   }
 
+
+    //(E4) Se obtiene la etiqueta anchor del menú desplegable
+  const cambiarModo = document.getElementById("cambiarModo");
+
+  cambiarModo.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+  //(E4) Se guarda el modo en localStorage.
+    if(document.body.classList.contains("dark")){
+      localStorage.setItem("dark-mode", "true");
+    } else {
+      localStorage.setItem("dark-mode", "false");
+    }
+  });
+
+  //(E4) Se obtiene el modo actual y se añade o remueve la clase dark al body.
+  if(localStorage.getItem("dark-mode") === "true"){
+    document.body.classList.add("dark");
+  } else {
+    document.body.classList.remove("dark");
+  }
+};
+
+
   //(E4) Se llama por id al botón "cerrar sesion" del menú desplegable y al hacerle click se elminan
   //del localStorage los datos del usuario anteriormente logeado, y lurgo redirige a la pantalla de login.
 
@@ -73,36 +97,35 @@ function correoNav() {
 
   logOut.addEventListener("click", (e) => {
     e.preventDefault();
-
+  
     localStorage.removeItem("estaLogeado");
     localStorage.removeItem("correo");
-
+  
     window.location.href = "login.html";
   });
 
-  const cambiarModo = document.getElementById("cambiarModo");
-  const body = document.querySelector("body");
+//   const cambiarModo = document.getElementById("cambiarModo");
+//   const body = document.querySelector("body");
 
-  // (E4) Función para cambiar modo día y noche
-  function cambiarModoActual() {
+//   // (E4) Función para cambiar modo día y noche
+//   function cambiarModoActual() {
 
-    if (body.classList.contains("darkmode")) {
-      body.classList.remove("darkmode");
-      localStorage.setItem("Modo", "Light");
-    } else {
-      body.classList.add("darkmode");
-      localStorage.setItem("Modo", "Dark");
-    }
+//     if (body.classList.contains("darkmode")) {
+//       body.classList.remove("darkmode");
+//       localStorage.setItem("Modo", "Light");
+//     } else {
+//       body.classList.add("darkmode");
+//       localStorage.setItem("Modo", "Dark");
+//     }
     
-  };
+//   };
 
-  // (E4) Verificar el modo actual en localStorage y aplicarlo
-  if (localStorage.getItem("Modo") === "Dark") {
-    body.classList.add("darkmode");
-  };
+//   // (E4) Verificar el modo actual en localStorage y aplicarlo
+//   if (localStorage.getItem("Modo") === "Dark") {
+//     body.classList.add("darkmode");
+//   };
 
-  cambiarModo.addEventListener("click", (e) => {
-    e.preventDefault();
-    cambiarModoActual();
-  });
-};
+//   cambiarModo.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     cambiarModoActual();
+//   });
