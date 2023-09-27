@@ -4,10 +4,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     además guardamos la url con el producto y los llamamos según el id.*/
 
   const divInfo = document.getElementById("product-info");
+  const divComentario = document.getElementById("comentario");
   const productInfo = localStorage.getItem("idProduc");
   let puntuacion = 0;
   const stars = document.querySelectorAll(".star");
   const urlInfo = `https://japceibal.github.io/emercado-api/products/${productInfo}.json`;
+  const categoryUrl ="https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
+
 
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
   const res1 = await getJSONData(urlInfo);
@@ -31,16 +34,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     divInfo.innerHTML += `<img src= "${img}" class="imgProductos">`;
   });
 
+  //(E4)se crea funcion para mostrar productos relacionados
+  const relatedProduct = async() =>
+  {
+    const promise = await getJSONData(categoryUrl)
+    const divRelated = document.getElementById("related")
+    divRelated.innerHTML += `
+                            <div>
+                              <h4>Productos relacionados</h4>
+                            </div>
+                            `;
+    promise.data.products.forEach((product)=>
+      { 
+        if (product.id !=productInfo)
+        {
+          const html =`
+                      <div id="${product.id}" onclick="productoRecomendado(id)">
+                        <img src="${product.image}" alt="car image" class="imgProductos"> 
+                        <h4>${product.name}</h4>
+                      </div>
+                      `;
+          divRelated.innerHTML += html 
+        };
+      });
+};
+  relatedProduct();
   correoNav();
+
 
   //(E3)Accedemos al json de los comentarios
   //(E3)Con un forEach recorremos el array para poder mostrar los comentarios y puntajes de cada uno de los productos
   const urlComments = `https://japceibal.github.io/emercado-api/products_comments/${productInfo}.json`;
   const res2 = await getJSONData(urlComments);
-  divInfo.innerHTML += `
+  divComentario.innerHTML += `
           <h4 id="tituloComentarios">Comentarios</h4>`;
   res2.data.forEach((element) => {
-    divInfo.innerHTML += `
+    divComentario.innerHTML += `
       <div class="comentario">
           <br>
           <p><strong> ${element.user} </strong> - ${element.dateTime} - 
@@ -67,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   /*(E3) cuando el usuario envía la información, pasa a mostrarse en pantalla junto al resto de las opiniones*/
   document.getElementById("formPuntuacion").addEventListener("submit", (e) => {
     e.preventDefault();
-    divInfo.innerHTML += `
+    divComentario.innerHTML += `
         <div class="comentario">
         <br>
         <p><strong> ${localStorage.getItem(
@@ -103,3 +132,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 });
+
+function productoRecomendado(id)
+{
+  localStorage.setItem("idProduc",id)
+  window.location.reload();
+};
