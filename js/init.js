@@ -104,28 +104,3 @@ function correoNav() {
     window.location.href = "login.html";
   });
 
-//   const cambiarModo = document.getElementById("cambiarModo");
-//   const body = document.querySelector("body");
-
-//   // (E4) Función para cambiar modo día y noche
-//   function cambiarModoActual() {
-
-//     if (body.classList.contains("darkmode")) {
-//       body.classList.remove("darkmode");
-//       localStorage.setItem("Modo", "Light");
-//     } else {
-//       body.classList.add("darkmode");
-//       localStorage.setItem("Modo", "Dark");
-//     }
-    
-//   };
-
-//   // (E4) Verificar el modo actual en localStorage y aplicarlo
-//   if (localStorage.getItem("Modo") === "Dark") {
-//     body.classList.add("darkmode");
-//   };
-
-//   cambiarModo.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     cambiarModoActual();
-//   });
