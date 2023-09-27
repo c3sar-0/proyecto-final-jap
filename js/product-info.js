@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   let puntuacion = 0;
   const stars = document.querySelectorAll(".star");
   const urlInfo = `https://japceibal.github.io/emercado-api/products/${productInfo}.json`;
-  const categoryUrl ="https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
-
+  const categoryUrl =
+    "https://japceibal.github.io/emercado-api/cats_products/" +
+    localStorage.getItem("catID") +
+    ".json";
 
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
   const res1 = await getJSONData(urlInfo);
@@ -35,32 +37,44 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   //(E4)se crea funcion para mostrar productos relacionados
-  const relatedProduct = async() =>
-  {
-    const promise = await getJSONData(categoryUrl)
-    const divRelated = document.getElementById("related")
+  const relatedProduct = async () => {
+    const promise = await getJSONData(categoryUrl);
+    const divRelated = document.getElementById("related");
     divRelated.innerHTML += `
                             <div>
                               <h4>Productos relacionados</h4>
                             </div>
                             `;
-    promise.data.products.forEach((product)=>
-      { 
-        if (product.id !=productInfo)
-        {
-          const html =`
+    promise.data.products.forEach((product) => {
+      if (product.id != productInfo) {
+        const html = `
                       <div id="${product.id}" onclick="productoRecomendado(id)">
                         <img src="${product.image}" alt="car image" class="imgProductos"> 
                         <h4>${product.name}</h4>
                       </div>
                       `;
-          divRelated.innerHTML += html 
-        };
-      });
-};
+        divRelated.innerHTML += html;
+      }
+    });
+  };
   relatedProduct();
   correoNav();
 
+  function generateComment(user, dateTime, score, description) {
+    const html = `
+    <div class="comentario">
+        <br>
+        <p><strong> ${user} </strong> - ${dateTime} - 
+            <span class="fa fa-star ${score >= 1 && "checked"}"></span>
+            <span class="fa fa-star ${score >= 2 && "checked"}"></span>
+            <span class="fa fa-star ${score >= 3 && "checked"}"></span>
+            <span class="fa fa-star ${score >= 4 && "checked"}"></span>
+            <span class="fa fa-star ${score == 5 && "checked"}"></span> </p>
+        <p>${description}</p>
+    </div>    
+`;
+    return html;
+  }
 
   //(E3)Accedemos al json de los comentarios
   //(E3)Con un forEach recorremos el array para poder mostrar los comentarios y puntajes de cada uno de los productos
@@ -69,48 +83,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   divComentario.innerHTML += `
           <h4 id="tituloComentarios">Comentarios</h4>`;
   res2.data.forEach((element) => {
-    divComentario.innerHTML += `
-      <div class="comentario">
-          <br>
-          <p><strong> ${element.user} </strong> - ${element.dateTime} - 
-              <span class="fa fa-star ${
-                element.score >= 1 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score >= 2 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score >= 3 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score >= 4 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score == 5 && "checked"
-              }"></span> </p>
-          <p>${element.description}</p>
-      </div>    
-  `;
+    divComentario.innerHTML += generateComment(
+      element.user,
+      element.dateTime,
+      element.score,
+      element.description
+    );
   });
 
   /*(E3) cuando el usuario envía la información, pasa a mostrarse en pantalla junto al resto de las opiniones*/
   document.getElementById("formPuntuacion").addEventListener("submit", (e) => {
     e.preventDefault();
-    divComentario.innerHTML += `
-        <div class="comentario">
-        <br>
-        <p><strong> ${localStorage.getItem(
-          "correo"
-        )} </strong> - ${new Date().toLocaleDateString()} - 
-            <span class="fa fa-star ${puntuacion >= 1 && "checked"}"></span>
-            <span class="fa fa-star ${puntuacion >= 2 && "checked"}"></span>
-            <span class="fa fa-star ${puntuacion >= 3 && "checked"}"></span>
-            <span class="fa fa-star ${puntuacion >= 4 && "checked"}"></span>
-            <span class="fa fa-star ${
-              puntuacion == 5 && "checked"
-            }"></span> </p>
-        <p>${document.getElementById("opinionUsuario").value}</p>
-    </div> `;
+    divComentario.innerHTML += generateComment(
+      localStorage.getItem("correo"),
+      new Date().toLocaleDateString(),
+      puntuacion,
+      document.getElementById("opinionUsuario").value
+    );
 
     //(E3) una vez que se manda la info, se limpia el valor del textarea y la calificación por estrellas
     document.getElementById("opinionUsuario").value = "";
@@ -133,8 +122,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-function productoRecomendado(id)
-{
-  localStorage.setItem("idProduc",id)
+function productoRecomendado(id) {
+  localStorage.setItem("idProduc", id);
   window.location.reload();
-};
+}
