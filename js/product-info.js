@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   `;
   const imagenes = res1.data.images;
   
+  //(E4) Se crea una imagen del carrusel con "active" y el resto de las imagenes con un bucle for
   divCarrusel.innerHTML += 
  `
   <div class="carousel-item active">
@@ -62,39 +63,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const promise = await getJSONData(categoryUrl)
     const products = res1.data.relatedProducts;
     const divRelated = document.getElementById("related")
-
+    //(E4) Se crean divs con la imagen y nombre de los productos relacionados
+    //Al hacer click en ellos te envia al producto correspondiente
     products.forEach((product) =>{
       divRelated.innerHTML += `<div class = "borde" id="${product.id}" onclick="productoRecomendado(id)">
       <img src="${product.image}" class = "imgProductos">
       <p>${product.name}</p>
     </div>`;
     })
-    
-    /*divRelated.innerHTML += `<strong> Productos relacionados </strong>
-   
-    
-    <div id="${products[0].id}" onclick="productoRecomendado(id)">
-      <img src="${products[0].image}" class = "imgProductos">
-    </div>
-    <div id="${products[1].id}"  onclick="productoRecomendado(id)">
-      <img src="${products[1].image}" class = "imgProductos">
-    </div>
-    </div>
-    `;*/
-  
-    /*promise.data.products.forEach((product)=>
-      { 
-        if (product.id !=productInfo)
-        {
-          const html =`
-                      <div id="${product.id}" onclick="productoRecomendado(id)">
-                        <img src="${product.image}" alt="car image" class="imgProductos"> 
-                        <h4>${product.name}</h4>
-                      </div>
-                      `;
-          divRelated.innerHTML += html 
-        };
-      });*/
 };
   relatedProduct();
   correoNav();
@@ -171,6 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
+//(E4) Cambia el producto recomendado
 function productoRecomendado(id)
 {
   localStorage.setItem("idProduc",id)
