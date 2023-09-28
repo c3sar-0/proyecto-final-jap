@@ -242,3 +242,12 @@ a.custom-card:hover {
 .star.checked {
   color: goldenrod;
 }
+
+.carouselStyles{
+  width: 300px;
+  padding: 1rem;
+}
+
+.productosRelacionados{
+  display:flex;
+}

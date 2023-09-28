@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     además guardamos la url con el producto y los llamamos según el id.*/
 
   const divInfo = document.getElementById("product-info");
+  const divCarrusel = document.getElementById("carousel");
   const divComentario = document.getElementById("comentario");
   const productInfo = localStorage.getItem("idProduc");
   let puntuacion = 0;
@@ -30,21 +31,52 @@ document.addEventListener("DOMContentLoaded", async () => {
           <strong>Imágenes ilustrativas</strong>   
       </div>    
   `;
-  res1.data.images.forEach((img) => {
-    divInfo.innerHTML += `<img src= "${img}" class="imgProductos">`;
-  });
+  const imagenes = res1.data.images;
+  divCarrusel.innerHTML += 
+ `
+  <div class="carousel-item active">
+                          <img src= "${res1.data.images[0]}" class="imgProductos">
+                          </div>`
+  for(let i = 1; i<imagenes.length; i++) {
+   
+      divCarrusel.innerHTML += `<div class="carousel-item">
+                          <img src= "${imagenes[i]}" class="imgProductos">
+                          </div>`;
+    
+  };
+  divCarrusel.innerHTML += `</div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>`
 
   //(E4)se crea funcion para mostrar productos relacionados
+  
   const relatedProduct = async() =>
   {
     const promise = await getJSONData(categoryUrl)
+    const products = res1.data.relatedProducts;
     const divRelated = document.getElementById("related")
-    divRelated.innerHTML += `
-                            <div>
-                              <h4>Productos relacionados</h4>
-                            </div>
+
+    
+
+    divRelated.innerHTML += `<strong> Productos relacionados </strong>
+   
+    <div class = "productosRelacionados">
+    <div id="${products[0].id}" onclick="productoRecomendado(id)">
+      <img src="${products[0].image}" class = "imgProductos">
+    </div>
+    <div id="${products[1].id}"  onclick="productoRecomendado(id)">
+      <img src="${products[1].image}" class = "imgProductos">
+    </div>
+    </div>
                             `;
-    promise.data.products.forEach((product)=>
+  
+    /*promise.data.products.forEach((product)=>
       { 
         if (product.id !=productInfo)
         {
@@ -56,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                       `;
           divRelated.innerHTML += html 
         };
-      });
+      });*/
 };
   relatedProduct();
   correoNav();
