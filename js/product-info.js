@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>    
   `;
   const imagenes = res1.data.images;
+  
   divCarrusel.innerHTML += 
  `
   <div class="carousel-item active">
@@ -62,11 +63,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const products = res1.data.relatedProducts;
     const divRelated = document.getElementById("related")
 
+    products.forEach((product) =>{
+      divRelated.innerHTML += `<div class = "borde" id="${product.id}" onclick="productoRecomendado(id)">
+      <img src="${product.image}" class = "imgProductos">
+      <p>${product.name}</p>
+    </div>`;
+    })
     
-
-    divRelated.innerHTML += `<strong> Productos relacionados </strong>
+    /*divRelated.innerHTML += `<strong> Productos relacionados </strong>
    
-    <div class = "productosRelacionados">
+    
     <div id="${products[0].id}" onclick="productoRecomendado(id)">
       <img src="${products[0].image}" class = "imgProductos">
     </div>
@@ -74,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <img src="${products[1].image}" class = "imgProductos">
     </div>
     </div>
-                            `;
+    `;*/
   
     /*promise.data.products.forEach((product)=>
       { 
