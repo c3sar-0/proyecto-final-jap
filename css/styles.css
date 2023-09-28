@@ -265,7 +265,7 @@ body.dark {
   color: white;
 }
 
-body.dark .list-group-item{
+body.dark .list-group-item {
   background-color: #3b3e42;
   color: #fff;
 }
@@ -278,4 +278,51 @@ body.dark .comentario {
 body.dark .card {
   background-color: #3b3e42;
   color: #fff;
+}
+
+#navbarNav,
+#footer {
+  background-color: #3C3C3C;
+}
+
+#navbarNav a,
+#footer p {
+  color: #F2F2F2;
+  display: flexbox;
+}
+
+#navbarNav li {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  /* Utilizamos flexbox para alinear los elementos */
+  justify-content: space-between;
+}
+
+#logo_index,
+#logo {
+  width: 15%;
+  justify-content: flex-start;
+}
+
+.card-text,
+.m-3 {
+  font-family: 'League Spartan', sans-serif;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
+}
+
+.nav-link {
+  padding: 0;
+}
+
+#video_index {
+  width: 100%;
+  height: 30%;
+}
+
+footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
