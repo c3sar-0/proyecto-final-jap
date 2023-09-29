@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   let puntuacion = 0;
   const stars = document.querySelectorAll(".star");
   const urlInfo = `https://japceibal.github.io/emercado-api/products/${productInfo}.json`;
-  const categoryUrl ="https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
-
+  const categoryUrl =
+    "https://japceibal.github.io/emercado-api/cats_products/" +
+    localStorage.getItem("catID") +
+    ".json";
 
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
   const res1 = await getJSONData(urlInfo);
@@ -32,20 +34,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>    
   `;
   const imagenes = res1.data.images;
-  
+
   //(E4) Se crea una imagen del carrusel con "active" y el resto de las imagenes con un bucle for
-  divCarrusel.innerHTML += 
- `
+  divCarrusel.innerHTML += `
   <div class="carousel-item active">
                           <img src= "${res1.data.images[0]}" class="imgProductos">
-                          </div>`
-  for(let i = 1; i<imagenes.length; i++) {
-   
-      divCarrusel.innerHTML += `<div class="carousel-item">
+                          </div>`;
+  for (let i = 1; i < imagenes.length; i++) {
+    divCarrusel.innerHTML += `<div class="carousel-item">
                           <img src= "${imagenes[i]}" class="imgProductos">
                           </div>`;
-    
-  };
+  }
   divCarrusel.innerHTML += `</div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -54,27 +53,41 @@ document.addEventListener("DOMContentLoaded", async () => {
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
-  </button>`
+  </button>`;
 
   //(E4)se crea funcion para mostrar productos relacionados
-  
-  const relatedProduct = async() =>
-  {
-    const promise = await getJSONData(categoryUrl)
+
+  const relatedProduct = async () => {
+    const promise = await getJSONData(categoryUrl);
     const products = res1.data.relatedProducts;
-    const divRelated = document.getElementById("related")
+    const divRelated = document.getElementById("related");
     //(E4) Se crean divs con la imagen y nombre de los productos relacionados
     //Al hacer click en ellos te envia al producto correspondiente
-    products.forEach((product) =>{
+    products.forEach((product) => {
       divRelated.innerHTML += `<div class = "borde" id="${product.id}" onclick="productoRecomendado(id)">
       <img src="${product.image}" class = "imgProductos">
       <p>${product.name}</p>
     </div>`;
-    })
-};
+    });
+  };
   relatedProduct();
   correoNav();
 
+  function generateComment(user, dateTime, score, description) {
+    const html = `
+    <div class="comentario">
+        <br>
+        <p><strong> ${user} </strong> - ${dateTime} - 
+            <span class="fa fa-star ${score >= 1 && "checked"}"></span>
+            <span class="fa fa-star ${score >= 2 && "checked"}"></span>
+            <span class="fa fa-star ${score >= 3 && "checked"}"></span>
+            <span class="fa fa-star ${score >= 4 && "checked"}"></span>
+            <span class="fa fa-star ${score == 5 && "checked"}"></span> </p>
+        <p>${description}</p>
+    </div>    
+`;
+    return html;
+  }
 
   //(E3)Accedemos al json de los comentarios
   //(E3)Con un forEach recorremos el array para poder mostrar los comentarios y puntajes de cada uno de los productos
@@ -83,48 +96,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   divComentario.innerHTML += `
           <h4 id="tituloComentarios">Comentarios</h4>`;
   res2.data.forEach((element) => {
-    divComentario.innerHTML += `
-      <div class="comentario">
-          <br>
-          <p><strong> ${element.user} </strong> - ${element.dateTime} - 
-              <span class="fa fa-star ${
-                element.score >= 1 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score >= 2 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score >= 3 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score >= 4 && "checked"
-              }"></span>
-              <span class="fa fa-star ${
-                element.score == 5 && "checked"
-              }"></span> </p>
-          <p>${element.description}</p>
-      </div>    
-  `;
+    divComentario.innerHTML += generateComment(
+      element.user,
+      element.dateTime,
+      element.score,
+      element.description
+    );
   });
 
   /*(E3) cuando el usuario envía la información, pasa a mostrarse en pantalla junto al resto de las opiniones*/
   document.getElementById("formPuntuacion").addEventListener("submit", (e) => {
     e.preventDefault();
-    divComentario.innerHTML += `
-        <div class="comentario">
-        <br>
-        <p><strong> ${localStorage.getItem(
-          "correo"
-        )} </strong> - ${new Date().toLocaleDateString()} - 
-            <span class="fa fa-star ${puntuacion >= 1 && "checked"}"></span>
-            <span class="fa fa-star ${puntuacion >= 2 && "checked"}"></span>
-            <span class="fa fa-star ${puntuacion >= 3 && "checked"}"></span>
-            <span class="fa fa-star ${puntuacion >= 4 && "checked"}"></span>
-            <span class="fa fa-star ${
-              puntuacion == 5 && "checked"
-            }"></span> </p>
-        <p>${document.getElementById("opinionUsuario").value}</p>
-    </div> `;
+    divComentario.innerHTML += generateComment(
+      localStorage.getItem("correo"),
+      new Date().toLocaleDateString(),
+      puntuacion,
+      document.getElementById("opinionUsuario").value
+    );
 
     //(E3) una vez que se manda la info, se limpia el valor del textarea y la calificación por estrellas
     document.getElementById("opinionUsuario").value = "";
@@ -148,8 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 //(E4) Cambia el producto recomendado
-function productoRecomendado(id)
-{
-  localStorage.setItem("idProduc",id)
+function productoRecomendado(id) {
+  localStorage.setItem("idProduc", id);
   window.location.reload();
-};
+}
