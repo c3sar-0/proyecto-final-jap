@@ -261,23 +261,25 @@ a.custom-card:hover {
 }
 
 body.dark {
-  background-color: #212529;
-  color: white;
+  background-color: #212121;
+  color: #F4F4F4;
 }
 
 body.dark .list-group-item {
-  background-color: #3b3e42;
-  color: #fff;
+  background-color: #212121;
+  color: #F4F4F4;
 }
 
 body.dark .comentario {
-  background-color: #3b3e42;
-  color: #fff;
+  background-color: #212121;
+
+  color: #F4F4F4;
 }
 
 body.dark .card {
-  background-color: #3b3e42;
-  color: #fff;
+
+  background-color: #212121;
+  color: #F4F4F4;
 }
 
 #navbarNav,
