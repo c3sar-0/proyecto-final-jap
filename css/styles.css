@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: "Verdana", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -243,17 +243,16 @@ a.custom-card:hover {
   color: goldenrod;
 }
 
-
-.carouselStyles{
+.carouselStyles {
   width: 300px;
   padding: 1rem;
 }
 
-.productosRelacionados{
-  display:flex;
+.productosRelacionados {
+  display: flex;
 }
 
-.borde{
+.borde {
   padding-left: 2rem;
   padding-top: 0%;
   border: rgba(192, 188, 188, 0.671) solid 0.1px;
@@ -262,34 +261,33 @@ a.custom-card:hover {
 
 body.dark {
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .list-group-item {
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .comentario {
   background-color: #212121;
 
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .card {
-
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 #navbarNav,
 #footer {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
 }
 
 #navbarNav a,
 #footer p {
-  color: #F2F2F2;
+  color: #f2f2f2;
   display: flexbox;
 }
 
@@ -309,10 +307,10 @@ body.dark .card {
 
 .card-text,
 .m-3 {
-  font-family: 'League Spartan', sans-serif;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font-family: "League Spartan", sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .nav-link {
@@ -327,4 +325,15 @@ body.dark .card {
 footer {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
+}
+
+.cart-img {
+  height: 4rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid rgb(182, 182, 182);
+  padding: 1.2rem;
 }
