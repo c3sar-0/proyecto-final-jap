@@ -38,9 +38,26 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      <!--Creamos un form que le permite al usuario elegir el modo de envio y añadir su direccion-->
+      <form>
+        <h4>Tipo de envío</h4>
+        <div>
+          <input type="radio" id="envioPremium" name="envio" value="premium" />
+          <label for="envioPremium">Premium 2 a 5 dias (15%)</label>
+          <input type="radio" id="envioExpress" name="envio" value="express" />
+          <label for="envioExpress">Express 5 a 8 días (7%)</label>
+          <input type="radio" id="envioStandard" name="envio" value="standard" />
+          <label for="envioStandard">Standard 12 a 15 días (5%)</label>
+        </div>
+        <h4>Dirección de envío</h4>
+        <p>Calle</p>
+        <input type="text" id="calleBox">
+        <p>Número</p>
+        <input type="text" id="numeroBox">
+        <p>Esquina</p>
+        <input type="text" id="esquinaBox">
+        <button>Comprar</button>
+      </form>
     </div>
   </main>
   <footer id="footer" class="text-muted">
