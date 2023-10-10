@@ -49,22 +49,21 @@ function correoNav() {
   // (E4) Se agrega un menú desplegable.
   const mostrarLogin = document.getElementById("login");
   if (localStorage.getItem("correo")) {
-    mostrarLogin.innerHTML = ` <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
+    mostrarLogin.innerHTML = ` 
+    <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               ${localStorage.getItem("correo")}
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <ul class="dropdown-menu dropdown-menu-dark"
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
               <li><a class="dropdown-item" href="#" id ="cambiarModo">Cambiar modo</a></li>
               <li><a class="dropdown-item" id = 'logOut'>Cerrar sesión</a></li>
             </ul>
-          </li>
-        </ul>
-      </div>`;
+          </li>`;
   }
+
+ 
 
 
     //(E4) Se obtiene la etiqueta anchor del menú desplegable
