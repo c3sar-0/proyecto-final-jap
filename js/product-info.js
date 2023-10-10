@@ -14,30 +14,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     "https://japceibal.github.io/emercado-api/cats_products/" +
     localStorage.getItem("catID") +
     ".json";
-    let pCarrito= [];
-    function productCarrito (compra)
-    {
-        const producto=
-          {
-            id: compra.data.id ,
-            image: compra.data.images[0],
-            name: compra.data.name,
-            currency: compra.data.currency,
-            unitCost: compra.data.cost,
-          }
-          pCarrito.push(producto)
-        const products = JSON.parse(localStorage.getItem('carrito'));
-        if (!products || products.length == 0) 
-        {
-        localStorage.setItem('carrito',JSON.stringify([pCarrito]))
-        } 
-        else 
-        {
-          localStorage.setItem('carrito', JSON.stringify([...localStorage.getItem('carrito'), pCarrito]))
-        }
-      
+  function productCarrito(compra) {
+    const producto = {
+      id: compra.data.id,
+      image: compra.data.images[0],
+      name: compra.data.name,
+      currency: compra.data.currency,
+      unitCost: compra.data.cost,
+    };
+    const products = JSON.parse(localStorage.getItem("carrito"));
+    if (!products || products.length == 0) {
+      localStorage.setItem("carrito", JSON.stringify([producto]));
+    } else {
+      localStorage.setItem(
+        "carrito",
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("carrito")),
+          producto,
+        ])
+      );
     }
-    
+  }
+
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
   const res1 = await getJSONData(urlInfo);
   divInfo.innerHTML = "";
@@ -60,12 +58,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>    
   `;
   const imagenes = res1.data.images;
-  document.getElementById("btnComprar").addEventListener("click",()=>
-  {
-
+  document.getElementById("btnComprar").addEventListener("click", () => {
     productCarrito(res1);
     console.log(res1);
-    
   });
 
   //(E4) Se crea una imagen del carrusel con "active" y el resto de las imagenes con un bucle for
