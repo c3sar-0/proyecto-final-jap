@@ -54,7 +54,7 @@ function correoNav() {
             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               ${localStorage.getItem("correo")}
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark"
+            <ul class="dropdown-menu dropdown-menu-dark bg-dark">
               <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
               <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
               <li><a class="dropdown-item" href="#" id ="cambiarModo">Cambiar modo</a></li>

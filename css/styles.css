@@ -206,7 +206,7 @@ a.custom-card:hover {
   margin-top: 3rem;
 }
 
-.imgProductos, .imgProducts {
+.imgProducts {
   width: 18rem;
   margin-top: 1.3rem;
   margin-right: 2rem;
@@ -238,8 +238,16 @@ a.custom-card:hover {
 
 
 .carouselStyles {
-  width: 18.75rem;
+  margin-left: 2rem;
+  width: 70rem;
   padding: 1rem;
+}
+
+.imgProductos {
+  margin-left: 2rem;
+  width: 70rem;
+  margin-top: 1.3rem;
+  margin-right: 2rem;
 }
 
 .productosRelacionados {
@@ -379,7 +387,7 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .buscadorProductos input{
     margin-left: 0%;
     width: 100%;
@@ -389,5 +397,16 @@ footer {
   }
   .parrafoProductInfo {
     font-size: 1.5rem;
+  }
+  .carouselStyles {
+    margin-left: 0rem;
+    width: 100%;
+    padding: 1rem;
+  }
+  .imgProductos {
+    margin-left: 0rem;
+    width: 100%;
+    margin-top: 1.3rem;
+    margin-right: 2rem;
   }
 }
