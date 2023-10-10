@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("products-container");
   const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  //let lista = [...datosCompra.articles, ...localStorage.getItem("carrito")];
 
   //(E5) busco los datos para trabajar con ellos
   const promesa = await fetch(url)
