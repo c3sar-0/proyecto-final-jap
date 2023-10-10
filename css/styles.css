@@ -206,7 +206,7 @@ a.custom-card:hover {
   margin-top: 3rem;
 }
 
-.imgProductos {
+.imgProductos, .imgProducts {
   width: 18rem;
   margin-top: 1.3rem;
   margin-right: 2rem;
@@ -322,8 +322,72 @@ footer {
   padding-bottom: 1.5rem;
 }
 
-@media (max-with: 375px) {
-  #catName h4 {
-    font-size: x-large;
+#ordenarCategorias {
+  text-align: end;
+}
+
+#ordenarProductos {
+  text-align: end;
+}
+
+.buscadorProductos input{
+  margin-left: 69%;
+  width: 25rem;
+}
+
+.catName {
+  font-size: x-large;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  filter: invert(108%);
+}
+
+.parrafoProductInfo {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.descripcionComentario {
+  margin-top: 1.4rem;
+}
+
+@media (max-width: 425px)  {
+  #ordenarCategorias {
+    text-align: center;
+  }
+  #ordenarProductos {
+    text-align: center;
+  }
+  #opinionUsuario {
+    width: 100%;
+  }
+  .productosRelacionados {
+    display: block;
+  }
+  .borde, .imgProducts, .parrafoProductInfo {
+    width: 80%;
+  }
+  .comentario {
+    width: 100%;
+  }
+  .comentario p {
+    line-height: 1.5;
+  }
+  footer p {
+    font-size: small;
+  }
+}
+
+@media (max-width: 768px) {
+  .buscadorProductos input{
+    margin-left: 0%;
+    width: 100%;
+  }
+  .catName{
+    font-size: medium;
+  }
+  .parrafoProductInfo {
+    font-size: 1.5rem;
   }
 }
