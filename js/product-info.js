@@ -14,6 +14,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     "https://japceibal.github.io/emercado-api/cats_products/" +
     localStorage.getItem("catID") +
     ".json";
+
+    /*function sumaArticulos(articulo, lista){
+      let cont = 0;
+      lista.forEach((art) => {
+        if(art.id == articulo.id){
+          cont++;
+        }
+      });
+      return cont;
+    }*/
   function productCarrito(compra) {
     const producto = {
       id: compra.data.id,
@@ -21,20 +31,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       name: compra.data.name,
       currency: compra.data.currency,
       unitCost: compra.data.cost,
+      count: 1,
     };
+
     const products = JSON.parse(localStorage.getItem("carrito"));
+    
+
     if (!products || products.length == 0) {
       localStorage.setItem("carrito", JSON.stringify([producto]));
     } else {
+      //producto.count = sumaArticulos(producto, products);
       localStorage.setItem(
         "carrito",
         JSON.stringify([
-          ...JSON.parse(localStorage.getItem("carrito")),
+          ...(JSON.parse(localStorage.getItem("carrito")).filter(art => art.id != producto.id)),
           producto,
         ])
       );
     }
   }
+
 
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
   const res1 = await getJSONData(urlInfo);
