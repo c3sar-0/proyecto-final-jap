@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const imagenes = res1.data.images;
   document.getElementById("btnComprar").addEventListener("click", () => {
     productCarrito(res1);
-    window.location.href = "cart.html";
+    window.location.href = "../cart.html";
   });
 
   //(E4) Se crea una imagen del carrusel con "active" y el resto de las imagenes con un bucle for
