@@ -99,15 +99,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   //(E4)se crea funcion para mostrar productos relacionados
 
   const relatedProduct = async () => {
-    const promise = await getJSONData(categoryUrl);
     const products = res1.data.relatedProducts;
     const divRelated = document.getElementById("related");
     //(E4) Se crean divs con la imagen y nombre de los productos relacionados
     //Al hacer click en ellos te envia al producto correspondiente
     products.forEach((product) => {
-      divRelated.innerHTML += `<div class = "borde" id="${product.id}" onclick="productoRecomendado(id)">
-      <img src="${product.image}" class = "imgProductos">
-      <p>${product.name}</p>
+      divRelated.innerHTML += `<div class ="borde" id="${product.id}" onclick="productoRecomendado(id)">
+      <img src="${product.image}" class = "imgProducts">
+      <p class="parrafoProductInfo">${product.name}</p>
     </div>`;
     });
   };
@@ -118,13 +117,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const html = `
     <div class="comentario">
         <br>
-        <p><strong> ${user} </strong> - ${dateTime} - 
-            <span class="fa fa-star ${score >= 1 && "checked"}"></span>
-            <span class="fa fa-star ${score >= 2 && "checked"}"></span>
-            <span class="fa fa-star ${score >= 3 && "checked"}"></span>
-            <span class="fa fa-star ${score >= 4 && "checked"}"></span>
-            <span class="fa fa-star ${score == 5 && "checked"}"></span> </p>
-        <p>${description}</p>
+        <p><strong> ${user} </strong> - ${dateTime}</p>
+        <p class="descripcionComentario">${description}</p>
+        <p><span class="fa fa-star ${score >= 1 && "checked"}"></span>
+        <span class="fa fa-star ${score >= 2 && "checked"}"></span>
+        <span class="fa fa-star ${score >= 3 && "checked"}"></span>
+        <span class="fa fa-star ${score >= 4 && "checked"}"></span>
+        <span class="fa fa-star ${score == 5 && "checked"}"></span></p>
     </div>    
 `;
     return html;
