@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   divInfo.innerHTML = "";
   divInfo.innerHTML += `
       <div>
-          <div>
+          <div class="d-flex justify-content-between mt-5">
             <h3 id="nomProducto">${res1.data.name}</h3>
-            <button id="btnComprar">Comprar</button>
+            <button class="btn btn-outline-warning text-secondary" id="btnComprar">Comprar</button>
           </div>
           <hr id="hrProductos">
           <strong>Precio</strong>
