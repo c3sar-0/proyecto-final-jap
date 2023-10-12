@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
+  <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
@@ -39,9 +36,22 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <!--Creamos un form que le permite al usuario elegir el modo de envio y añadir su direccion-->
-      <form>
+    
+    <main>
+      <div class="container">
+        <center><h2>Carrito de compras</h2></center>
+        <h4>Artículos a comprar</h2>
+        <table id="products-container">
+          <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+          <hr>
+        </table>
+         <form>
         <h4>Tipo de envío</h4>
         <div>
           <input type="radio" id="envioPremium" name="envio" value="premium" />
@@ -60,28 +70,31 @@
         <input type="text" id="esquinaBox">
         <button>Comprar</button>
       </form>
+      </div>
+    </main>
+    <footer id="footer" class="text-muted">
+      <div class="container">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+            >Jovenes a Programar</a
+          >
+        </p>
+      </div>
+    </footer>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
-  </main>
-  <footer id="footer" class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
-      </p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
-</body>
-
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/cart.js"></script>
+  </body>
 </html>

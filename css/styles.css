@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: "Verdana", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,10 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
+
   background-color: #53C0FB;
   background: url('../img/video_index.mp4');
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,12 +68,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -236,7 +238,6 @@ a.custom-card:hover {
   color: goldenrod;
 }
 
-
 .carouselStyles {
   margin-left: 2rem;
   width: 70rem;
@@ -263,34 +264,33 @@ a.custom-card:hover {
 
 body.dark {
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .list-group-item {
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .comentario {
   background-color: #212121;
 
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .card {
-
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 #navbarNav,
 #footer {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
 }
 
 #navbarNav a,
 #footer p {
-  color: #F2F2F2;
+  color: #f2f2f2;
   display: flexbox;
 }
 
@@ -310,10 +310,10 @@ body.dark .card {
 
 .card-text,
 .m-3 {
-  font-family: 'League Spartan', sans-serif;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font-family: "League Spartan", sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .nav-link {
@@ -409,4 +409,14 @@ footer {
     margin-top: 1.3rem;
     margin-right: 2rem;
   }
+}
+.cart-img {
+  height: 4rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid rgb(182, 182, 182);
+  padding: 1.2rem;
 }
