@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("products-container");
   const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
+  correoNav()
+
   //(E5) busco los datos para trabajar con ellos
   const promesa = await fetch(url);
   const datosCompra = await promesa.json();
@@ -15,9 +17,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   //const estructura = (compra) =>
   //{
   /*(E5)se crea una estructura prototipo con id para usarlos en el evento "input"*/
-  let valInput;
   lista.forEach((articulo) => {
     const input = document.createElement("input");
+    input.classList.add("cantidadArticulos")
     input.setAttribute("type", "number");
     input.setAttribute("value", articulo.count);
     input.setAttribute("id", articulo.id);
@@ -31,9 +33,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const row = document.createElement("tr");
     row.innerHTML += `
-        <th><img class="cart-img" src="${articulo.image}"></th>
+        <th class="d-lg-block d-md-none d-sm-none d-none"><img class="cart-img" src="${articulo.image}"></th>
         <th>${articulo.name}</th>
-        <th>${articulo.currency} ${articulo.unitCost}</th>
+        <th class="d-lg-table-cell d-md-none d-sm-none d-none">${articulo.currency} ${articulo.unitCost}</th>
         <th></th>
         <th id="subTotal-${articulo.id}">${articulo.currency} ${articulo.unitCost}</th>
       `;
