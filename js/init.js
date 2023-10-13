@@ -89,10 +89,10 @@ function correoNav() {
 
 async function loadCart() {
   const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
-  const promesa = await fetch(url);
-  const datosCompra = await promesa.json();
   const carrito = localStorage.getItem("carrito");
   if (!carrito || JSON.parse(carrito).length == 0) {
+    const promesa = await fetch(url);
+    const datosCompra = await promesa.json();
     localStorage.setItem("carrito", JSON.stringify(datosCompra.articles));
   }
 }
