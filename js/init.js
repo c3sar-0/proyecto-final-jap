@@ -1,12 +1,14 @@
 const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
-const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
+const PUBLISH_PRODUCT_URL =
+  "https://japceibal.github.io/emercado-api/sell/publish.json";
 const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
 const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
+const PRODUCT_INFO_COMMENTS_URL =
+  "https://japceibal.github.io/emercado-api/products_comments/";
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
-
+//localStorage.setItem('carrito',JSON.stringify([]));
 let showSpinner = function () {
   document.getElementById("spinner-wrapper").style.display = "block";
 };
@@ -63,17 +65,14 @@ function correoNav() {
           </li>`;
   }
 
- 
-
-
-    //(E4) Se obtiene la etiqueta anchor del menú desplegable
+  //(E4) Se obtiene la etiqueta anchor del menú desplegable
   const cambiarModo = document.getElementById("cambiarModo");
 
   cambiarModo.addEventListener("click", () => {
     document.body.classList.toggle("dark");
 
-  //(E4) Se guarda el modo en localStorage.
-    if(document.body.classList.contains("dark")){
+    //(E4) Se guarda el modo en localStorage.
+    if (document.body.classList.contains("dark")) {
       localStorage.setItem("dark-mode", "true");
     } else {
       localStorage.setItem("dark-mode", "false");
@@ -81,25 +80,35 @@ function correoNav() {
   });
 
   //(E4) Se obtiene el modo actual y se añade o remueve la clase dark al body.
-  if(localStorage.getItem("dark-mode") === "true"){
+  if (localStorage.getItem("dark-mode") === "true") {
     document.body.classList.add("dark");
   } else {
     document.body.classList.remove("dark");
   }
-};
+}
 
+async function loadCart() {
+  const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  const carrito = localStorage.getItem("carrito");
+  if (!carrito || JSON.parse(carrito).length == 0) {
+    const promesa = await fetch(url);
+    const datosCompra = await promesa.json();
+    localStorage.setItem("carrito", JSON.stringify(datosCompra.articles));
+  }
+}
 
-  //(E4) Se llama por id al botón "cerrar sesion" del menú desplegable y al hacerle click se elminan
-  //del localStorage los datos del usuario anteriormente logeado, y lurgo redirige a la pantalla de login.
+loadCart();
 
-  const logOut = document.getElementById("logOut");
+//(E4) Se llama por id al botón "cerrar sesion" del menú desplegable y al hacerle click se elminan
+//del localStorage los datos del usuario anteriormente logeado, y lurgo redirige a la pantalla de login.
 
-  logOut.addEventListener("click", (e) => {
-    e.preventDefault();
-  
-    localStorage.removeItem("estaLogeado");
-    localStorage.removeItem("correo");
-  
-    window.location.href = "login.html";
-  });
+const logOut = document.getElementById("logOut");
 
+logOut.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  localStorage.removeItem("estaLogeado");
+  localStorage.removeItem("correo");
+
+  window.location.href = "login.html";
+});

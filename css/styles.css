@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: "Verdana", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -22,7 +22,7 @@ nav a {
   user-select: none;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768rem) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
@@ -32,8 +32,10 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
+
   background-color: #53C0FB;
   background: url('../img/video_index.mp4');
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -66,12 +68,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -212,10 +214,6 @@ a.custom-card:hover {
   margin-right: 2rem;
 }
 
-#nomProducto {
-  margin-top: 1.3rem;
-}
-
 #hrProductos {
   margin-top: 1.8rem;
 }
@@ -235,7 +233,6 @@ a.custom-card:hover {
 .star.checked {
   color: goldenrod;
 }
-
 
 .carouselStyles {
   margin-left: 2rem;
@@ -263,34 +260,41 @@ a.custom-card:hover {
 
 body.dark {
   background-color: #212121;
-  color: #F4F4F4;
+  color: #f4f4f4;
 }
 
 body.dark .list-group-item {
-  background-color: #212121;
-  color: #F4F4F4;
+  background-color: #3a3a3a;
+  color: #f4f4f4;
 }
 
 body.dark .comentario {
-  background-color: #212121;
-
-  color: #F4F4F4;
+  background-color: #3a3a3a;
+  color: #f4f4f4;
 }
 
 body.dark .card {
+  background-color: #3a3a3a;
+  color: #f4f4f4;
+}
 
-  background-color: #212121;
-  color: #F4F4F4;
+body.dark #products-container{
+  background-color: #3a3a3a;
+  color: #f4f4f4;
+}
+
+body.dark input {
+  background-color: rgb(228, 222, 222);
 }
 
 #navbarNav,
 #footer {
-  background-color: #3C3C3C;
+  background-color: #3c3c3c;
 }
 
 #navbarNav a,
 #footer p {
-  color: #F2F2F2;
+  color: #f2f2f2;
   display: flexbox;
 }
 
@@ -310,10 +314,10 @@ body.dark .card {
 
 .card-text,
 .m-3 {
-  font-family: 'League Spartan', sans-serif;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font-family: "League Spartan", sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .nav-link {
@@ -360,6 +364,10 @@ footer {
   margin-top: 1.4rem;
 }
 
+.cantidadArticulos {
+  text-align: center;
+}
+
 @media (max-width: 425px)  {
   #ordenarCategorias {
     text-align: center;
@@ -398,6 +406,9 @@ footer {
   .parrafoProductInfo {
     font-size: 1.5rem;
   }
+  #products-container .cantidadArticulos {
+    width: 100%;
+  }
   .carouselStyles {
     margin-left: 0rem;
     width: 100%;
@@ -409,4 +420,13 @@ footer {
     margin-top: 1.3rem;
     margin-right: 2rem;
   }
+
+}
+.cart-img {
+  height: 4rem;
+}
+
+table, th, td {
+  border: 1px solid rgb(182, 182, 182);
+  padding: 1.2rem;
 }

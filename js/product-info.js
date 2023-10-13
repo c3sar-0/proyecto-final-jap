@@ -15,12 +15,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.getItem("catID") +
     ".json";
 
+  function productCarrito(compra) {
+    // Creamos el producto a partir de la compra
+    const producto = {
+      id: compra.data.id,
+      image: compra.data.images[0],
+      name: compra.data.name,
+      currency: compra.data.currency,
+      unitCost: compra.data.cost,
+      count: 1,
+    };
+
+    // Obtener carrito del localStorage
+    const products = JSON.parse(localStorage.getItem("carrito"));
+    const findProduct = products.find((p) => p.id == producto.id);
+    console.log(findProduct);
+    if (!findProduct) {
+      // Si no está, la agrega
+      localStorage.setItem("carrito", JSON.stringify([...products, producto]));
+    } else {
+      // Si ya está, no hace nada y da una alerta
+      alert("El producto ya está en el carrito!");
+    }
+    // }
+  }
+
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
   const res1 = await getJSONData(urlInfo);
   divInfo.innerHTML = "";
   divInfo.innerHTML += `
       <div>
-          <h3 id="nomProducto">${res1.data.name}</h3>
+          <div class="d-flex justify-content-between mt-5">
+            <h3 id="nomProducto">${res1.data.name}</h3>
+            <button class="btn btn-outline-warning text-secondary" id="btnComprar">Comprar</button>
+          </div>
           <hr id="hrProductos">
           <strong>Precio</strong>
           <p>${res1.data.currency}${res1.data.cost}</p>
@@ -34,6 +62,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>    
   `;
   const imagenes = res1.data.images;
+  document.getElementById("btnComprar").addEventListener("click", () => {
+    productCarrito(res1);
+  });
 
   //(E4) Se crea una imagen del carrusel con "active" y el resto de las imagenes con un bucle for
   divCarrusel.innerHTML += `
