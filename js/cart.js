@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   //const estructura = (compra) =>
   //{
   /*(E5)se crea una estructura prototipo con id para usarlos en el evento "input"*/
-  let numProduct = 0
+  let numProduct = 0;
   products.forEach((articulo) => {
     const input = document.createElement("input");
     input.classList.add("cantidadArticulos");
@@ -32,9 +32,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const subTotalElem = document.getElementById(`subTotal-${articulo.id}`);
       subTotalElem.innerHTML =
         articulo.currency + " " + articulo.unitCost * e.target.value;
+      const productIndex = carrito.findIndex((p) => p.id == articulo.id);
+      carrito[productIndex].count = e.target.value;
+      localStorage.setItem("carrito", JSON.stringify(carrito));
     });
 
-    const row = document.createElement("tr", {id: "Art"+articulo.id});
+    const row = document.createElement("tr", { id: "Art" + articulo.id });
     row.innerHTML += `
         <td class="d-lg-block d-md-none d-sm-none d-none"><img class="cart-img" src="${articulo.image}"></td>
         <td>${articulo.name}</td>
@@ -49,11 +52,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-function eliminarArt(id){
+function eliminarArt(id) {
+  let nuevaArray = JSON.parse(localStorage.getItem("carrito"));
+  nuevaArray.splice(id, 1);
 
-  let nuevaArray= JSON.parse(localStorage.getItem("carrito"));
-  nuevaArray.splice(id,1)
-
-  localStorage.setItem('carrito', JSON.stringify(nuevaArray))
+  localStorage.setItem("carrito", JSON.stringify(nuevaArray));
   location.reload();
 }
