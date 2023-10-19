@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   /*(E5)se crea una estructura prototipo con id para usarlos en el evento "input"*/
-  let numProduct = 0;
   products.forEach((articulo) => {
     const input = document.createElement("input");
     input.classList.add("cantidadArticulos");
@@ -40,9 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const subTotalElem = document.getElementById(`subTotal-${articulo.id}`);
       subTotalElem.innerHTML =
         articulo.currency + " " + articulo.unitCost * e.target.value;
-      const productIndex = carrito.findIndex((p) => p.id == articulo.id);
-      carrito[productIndex].count = e.target.value;
-      localStorage.setItem("carrito", JSON.stringify(carrito));
         //(E6) cuando se detecta un cambio en el imput agregamos ese cambio al precio del producto en la lista
         subProductos.forEach(producto=>
           {
@@ -53,22 +49,18 @@ document.addEventListener("DOMContentLoaded", async () => {
           })   
     });
 
-    const row = document.createElement("tr", { id: "Art" + articulo.id });
+    const row = document.createElement("tr");
     row.innerHTML += `
-        <td class="d-lg-block d-md-none d-sm-none d-none"><img class="cart-img" src="${articulo.image}"></td>
-        <td>${articulo.name}</td>
-        <td class="d-lg-table-cell d-md-none d-sm-none d-none">${articulo.currency} ${articulo.unitCost}</td>
-        <td></td>
-        <td id="subTotal-${articulo.id}">${articulo.currency} ${articulo.unitCost}</td>
-        <td><input type="button" id="${numProduct}" onclick="eliminarArt(id)"></td>
+        <th class="d-lg-block d-md-none d-sm-none d-none"><img class="cart-img" src="${articulo.image}"></th>
+        <th>${articulo.name}</th>
+        <th class="d-lg-table-cell d-md-none d-sm-none d-none">${articulo.currency} ${articulo.unitCost}</th>
+        <th></th>
+        <th id="subTotal-${articulo.id}">${articulo.currency} ${articulo.unitCost}</th>
       `;
     container.appendChild(row);
-
     row.querySelector("th:nth-child(4)").appendChild(input);
-    numProduct++;
     //(E6) vamos agregando id y precio a medida que estructuramos los productos en el html
     subProductos.push({id:articulo.id,precio:articulo.unitCost})
-
   });
 //(E6) calculamos el sub total y lo mostramos en su apartado
 subProductos.forEach(producto=>
@@ -108,11 +100,4 @@ radios.addEventListener("click",()=>
 
 });
 
-function eliminarArt(id) {
-  let nuevaArray = JSON.parse(localStorage.getItem("carrito"));
-  nuevaArray.splice(id, 1);
-
-  localStorage.setItem("carrito", JSON.stringify(nuevaArray));
-  location.reload();
-}
 
