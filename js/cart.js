@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.appendChild(row);
     row.querySelector("td:nth-child(4)").appendChild(input);
     numProduct++;
+    //(E6) vamos agregando id y precio a medida que estructuramos los productos en el html
+    subProductos.push({id:articulo.id,precio:articulo.unitCost})
   });
   //(E6) calculamos el sub total y lo mostramos en su apartado
   subProductos.forEach((producto) => {
