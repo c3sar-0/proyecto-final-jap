@@ -4,6 +4,12 @@ const precioEnvio = document.getElementById("costEnvio");
 const precioTotal = document.getElementById("pagoTotal");
 const radios = document.getElementById("radios");
 const infoCostos = document.getElementById("infoCostos");
+const envioForm = document.getElementById("btnFormEnvio");
+const formCarrito = document.getElementById("formCarrito");
+const radio1 = document.getElementById("tarjetaCredito");
+const radio2 = document.getElementById("transferenciaBancaria");
+const alertaPago = document.getElementById("alertaPago");
+const alertaFormulario = document.getElementById("alertaFormulario")
 //(E6)lista con identificador y precio/ variabes para subtotal, envio y total
 let subProductos = [];
 let subTotal = 0;
@@ -37,6 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     input.setAttribute("value", articulo.count);
     input.setAttribute("id", articulo.id);
     input.setAttribute("min", 0);
+    input.setAttribute("required", true)
     input.addEventListener("change", (e) => {
       const subTotalElem = document.getElementById(`subTotal-${articulo.id}`);
       subTotalElem.innerHTML =
@@ -96,6 +103,44 @@ document.addEventListener("DOMContentLoaded", async () => {
       subProductos.push({id:articulo.id,precio:articulo.unitCost})
     };
   });
+
+  const inputTabla = document.getElementsByClassName("cantidadArticulos")
+    formCarrito.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if(!radio1.checked && !radio2.checked) {
+        alertaPago.innerHTML = "";
+        alertaPago.innerHTML += `
+        <p style="color: red;">Debe seleccionar una forma de pago<p>
+        `;
+      } else {
+        alertaPago.innerHTML = "";
+      };
+
+      if(Array.from(inputTabla).every(input => input.value > 0) && formCarrito.checkValidity()) {
+     
+        alertaFormulario.innerHTML += `
+        <div class="alert alert-success" role="alert">
+        ¡Has comprado con éxito!
+        </div>
+        `;
+    
+        setTimeout(() => {
+          location.reload();
+        }, 1500);
+    
+      } else {
+        alertaFormulario.innerHTML += `
+        <div class="alert alert-danger" role="alert">
+        Comprueba que has completado todos los campos
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        `
+        setTimeout(() => {
+        alertaFormulario.innerHTML = "";
+        }, 7000);
+      }
+    });
 
 
   //(E6) calculamos el sub total y lo mostramos en su apartado
@@ -187,4 +232,6 @@ function disabledInput() {
     numeroCuenta.disabled = true;
   }
 }
+
+
 
