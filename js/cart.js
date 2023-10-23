@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }</td>
         <td><input type="button" id="${numProduct}" onclick="eliminarArt(id)"></td>
       `;
+
     container.appendChild(row);
     row.querySelector("td:nth-child(4)").appendChild(input);
     numProduct++;
@@ -147,3 +148,43 @@ function envioYTotal()
     selecEnvio=true
   
 };
+
+(function () {
+  'use strict'
+
+  var forms = document.querySelectorAll('.needs-validation')
+
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+function disabledInput() {
+  let tarjetaCredito = document.getElementById('tarjetaCredito');
+  let transferenciaBancaria = document.getElementById('transferenciaBancaria');
+  let numeroTarjeta = document.getElementById('numeroTarjeta');
+  let codigoSeguridad = document.getElementById('codigoSeguridad');
+  let vencimiento = document.getElementById('vencimiento');
+  let numeroCuenta = document.getElementById('numeroCuenta');
+
+  if (transferenciaBancaria.checked) {
+    numeroTarjeta.disabled = true;
+    codigoSeguridad.disabled = true;
+    vencimiento.disabled = true;
+    numeroCuenta.disabled = false;
+  } else if (tarjetaCredito.checked) {
+    numeroTarjeta.disabled = false;
+    codigoSeguridad.disabled = false;
+    vencimiento.disabled = false;
+    numeroCuenta.disabled = true;
+  }
+}
+
