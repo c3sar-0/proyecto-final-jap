@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     
       } else {
         alertaFormulario.innerHTML += `
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger d-flex justify-content-between" role="alert">
         Comprueba que has completado todos los campos
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   subProductos.forEach((producto) => {
     subTotal = subTotal + producto.precio;
   });
-  precioSubTotal.innerHTML = subTotal;
+  precioSubTotal.innerHTML = "USD " + subTotal;
 
 
   //(E6) detectamos cualquier cambio dentro de la etiqueta container y modificamos el subTotal en consecuencia
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     subProductos.forEach((producto) => {
       subTotal = subTotal + producto.precio;
     });
-    precioSubTotal.innerHTML = subTotal;
+    precioSubTotal.innerHTML = "USD " + subTotal;
     if (selecEnvio) 
     {
       envioYTotal();
@@ -189,9 +189,9 @@ function envioYTotal()
         envio = Math.trunc(subTotal * (radio.value / 100));
       }
     }
-    precioEnvio.innerHTML = envio;
+    precioEnvio.innerHTML = "USD " + envio;
     total = envio + subTotal;
-    precioTotal.innerHTML = total;
+    precioTotal.innerHTML = "USD " + total;
     selecEnvio=true
   
 };
