@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     //(E6) vamos agregando id y precio a medida que estructuramos los productos en el html
     if(articulo.currency == "UYU")
     {
-      subProductos.push({id:articulo.id,precio:(articulo.unitCost*articulo.count/40)})
+      subProductos.push({id:articulo.id,precio:(articulo.unitCost/40)*articulo.count})
     }
     else
     {
