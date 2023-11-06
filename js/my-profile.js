@@ -5,31 +5,37 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "/login.html";
   }
 
-  /*(function () {
-    "use strict";
-
-    let forms = document.querySelectorAll(".needs-validation");
-
-    Array.prototype.slice.call(forms).forEach(function (form) {
-      form.addEventListener(
-        "submit",
-        function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          } else {
-            
-          }
-
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  })();*/
-
   const formulario = document.getElementById("formProfile");
   const fotoPerfil = document.getElementById("fotoPerfil");
+  fotoPerfil.addEventListener("change", (e) => {
+    console.log(e.target.value);
+  });
+
+  function saveFileToLocalStorage() {
+    const fileInput = document.getElementById("fotoPerfil");
+
+    // Check if a file has been selected
+    if (fileInput.files.length === 0) {
+      return;
+    }
+
+    // Get the selected file
+    const selectedFile = fileInput.files[0];
+
+    // Create a FileReader to read the file
+    const reader = new FileReader();
+
+    // Define a function to execute when the file is read
+    reader.onload = function (event) {
+      const fileContent = event.target.result;
+
+      // Save the file content to local storage
+      localStorage.setItem("profile_picture", fileContent);
+    };
+
+    // Read the file as a data URL
+    reader.readAsDataURL(selectedFile);
+  }
 
   formulario.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -44,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
         segundoApellido: segundoApellido.value,
         email: email.value,
         telefono: telefono.value,
-        fotoPerfil: fotoPerfil.src,
       };
+      saveFileToLocalStorage();
       console.log(profile);
       localStorage.setItem("profile", JSON.stringify(profile));
     }
@@ -55,7 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let profile = JSON.parse(localStorage.getItem("profile"));
 
-  console.log(profile.fotoPerfil);
+  const imgPerfil = document.getElementById("imgPerfil");
+  imgPerfil.src =
+    localStorage.getItem("profile_picture") || "/img/img_perfil.png";
 
   primerNombre.value = profile.primerNombre || "";
   segundoNombre.value = profile.segundoNombre || "";
@@ -63,5 +71,4 @@ document.addEventListener("DOMContentLoaded", () => {
   segundoApellido.value = profile.segundoApellido || "";
   telefono.value = profile.telefono || "";
   email.value = localStorage.getItem("correo");
-  fotoPerfil.src = profile.fotoPerfil || fotoPerfil.src;
 });

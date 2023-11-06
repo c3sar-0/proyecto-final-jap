@@ -107,5 +107,7 @@ const logOut = document.getElementById("logOut");
 logOut.addEventListener("click", (e) => {
   localStorage.removeItem("estaLogeado");
   localStorage.removeItem("correo");
+  localStorage.removeItem("profile");
+  localStorage.removeItem("profile_picture");
   window.location.href = "login.html";
 });
