@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //Guardo el valor del mail en un item "correo"
     localStorage.setItem("correo", mail.value);
     // Guardamos la variable profile en el localStorage, que contiene la información del usuario (ahora solo contiene el email)
-    localStorage.setItem("profile", JSON.stringify(profile));
+    localStorage.setItem("profile", JSON.stringify({ email: mail.value }));
     /*Redirección a la página de inicio luego del envío del formulario*/
     window.location.href = "index.html";
   });
