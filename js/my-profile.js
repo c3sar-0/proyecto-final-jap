@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  //(E7) Valida que el usuario este logeado
   const logeado = localStorage.getItem("estaLogeado");
 
   if (!logeado) {
     window.location.href = "/login.html";
   }
 
+  //(E7) Función que realiza el cambio en la foto del usuario
   const formulario = document.getElementById("formProfile");
   const fotoPerfil = document.getElementById("fotoPerfil");
   fotoPerfil.addEventListener("change", (e) => {
@@ -14,29 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function saveFileToLocalStorage() {
     const fileInput = document.getElementById("fotoPerfil");
 
-    // Check if a file has been selected
     if (fileInput.files.length === 0) {
       return;
     }
-
-    // Get the selected file
     const selectedFile = fileInput.files[0];
-
-    // Create a FileReader to read the file
     const reader = new FileReader();
 
-    // Define a function to execute when the file is read
     reader.onload = function (event) {
       const fileContent = event.target.result;
-
-      // Save the file content to local storage
       localStorage.setItem("profile_picture", fileContent);
     };
-
-    // Read the file as a data URL
     reader.readAsDataURL(selectedFile);
+
+    location.reload();
   }
 
+  //(E7) Evento al botón del formulario que valida que los campos obligatorios estén completos
+  //y guarda la información en el localStorage
   formulario.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -52,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         telefono: telefono.value,
       };
       saveFileToLocalStorage();
-      console.log(profile);
       localStorage.setItem("profile", JSON.stringify(profile));
     }
 
@@ -61,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let profile = JSON.parse(localStorage.getItem("profile"));
 
+  //(E7) Se muestran los datos del usuario y/o se guarda la información por default
   const imgPerfil = document.getElementById("imgPerfil");
   imgPerfil.src =
     localStorage.getItem("profile_picture") || "/img/img_perfil.png";
