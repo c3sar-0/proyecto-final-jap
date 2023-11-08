@@ -401,6 +401,9 @@ footer {
     width: 100%;
     font-size: 0.8rem;
   }
+  .divBtnForm {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 1024px) {
