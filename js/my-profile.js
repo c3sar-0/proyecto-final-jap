@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //(E7) Función que realiza el cambio en la foto del usuario
   const formulario = document.getElementById("formProfile");
   const fotoPerfil = document.getElementById("fotoPerfil");
-  fotoPerfil.addEventListener("change", (e) => {
-    console.log(e.target.value);
-  });
 
   function saveFileToLocalStorage() {
     const fileInput = document.getElementById("fotoPerfil");
@@ -59,7 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
   //(E7) Se muestran los datos del usuario y/o se guarda la información por default
   const imgPerfil = document.getElementById("imgPerfil");
   imgPerfil.src =
-    localStorage.getItem("profile_picture") || "/img/img_perfil.png";
+    localStorage.getItem("profile_picture") ||
+    "/proyecto-final-jap/img/img_perfil.png";
 
   primerNombre.value = profile.primerNombre || "";
   segundoNombre.value = profile.segundoNombre || "";
