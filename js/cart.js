@@ -22,16 +22,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   const url = CART_INFO_URL;
 
   //(E5) busco los datos para trabajar con ellos
-  const carrito = JSON.parse(localStorage.getItem("carrito"));
   let products;
-  if (!carrito) {
-    const promesa = await fetch(url);
-    const datosCompra = await promesa.json();
-    products = datosCompra.articles;
-  } else {
-    products = carrito;
-  }
-
+  const promesa = await fetch(url,
+    {
+      headers: 
+      {
+        "access-token": localStorage.getItem("token"),
+      }
+    });
+  const datosCompra = await promesa.json();
+  products = datosCompra;
+  console.log(products);
   /*(E5)se crea una estructura prototipo con id para usarlos en el evento "input"*/
   let numProduct = 0;
   products.forEach((articulo) => {

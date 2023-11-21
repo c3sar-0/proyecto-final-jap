@@ -11,8 +11,8 @@ const secret_key = "clave secreta";
 const pool = mariadb.createPool({
   host: "localhost",
   user: "root",
-  password: "siempreperreo",
-  database: "CRUD",
+  password: "1234",
+  database: "e-comerce",
   connectionLimit: 5,
 });
 
@@ -99,9 +99,51 @@ app.get("/sell", async (req, res) => {
 });
 
 app.get("/user_cart", async (req, res) => {
-  res.json(userCart);
+
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const response = await conn.query(
+      "SELECT * FROM carrito"
+    );
+    
+    res.status(201).json(response);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server failed" });
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
 });
 
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
+});
+
+app.post("/user_cart", async (req,res)=>
+{
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const response = await conn.query(
+      "INSERT INTO carrito(id, unitCost, currency, name, count, image) VALUE(?, ?, ?, ?, ?,?)",
+      [
+        req.body.id,
+        req.body.unitCost,
+        req.body.currency,
+        req.body.name,
+        req.body.count,
+        req.body.image,
+        
+      ]
+      
+    );
+    
+    res.status(201).json({ id: parseInt(response.insertId), ...req.body });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server failed" });
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
 });

@@ -1,3 +1,5 @@
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   //id de div linea 40
   /*(E3) Creamos constantes donde almacenamos la información que creamos en el html, 
@@ -13,17 +15,37 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function productCarrito(compra) {
     // Creamos el producto a partir de la compra
-    const producto = {
+   /* const producto = {
       id: compra.data.id,
       image: compra.data.images[0],
       name: compra.data.name,
       currency: compra.data.currency,
       unitCost: compra.data.cost,
       count: 1,
-    };
+    };*/
+
+    fetch(CART_INFO_URL, 
+      {
+        method: "POST",
+         headers: 
+        {
+          "Content-type": "application/json",
+          "access-token": localStorage.getItem("token"),
+        },
+        body:
+        JSON.stringify({
+        
+        "id": compra.data.id,
+        "unitCost": compra.data.cost,
+        "currency": compra.data.currency,
+        "name": compra.data.name,
+        "count": 1,
+        "image": compra.data.images[0]
+        })
+      })
 
     // Obtener carrito del localStorage
-    const products = JSON.parse(localStorage.getItem("carrito"));
+   /* const products = JSON.parse(localStorage.getItem("carrito"));
     const findProduct = products.find((p) => p.id == producto.id);
     console.log(findProduct);
     if (!findProduct) {
@@ -33,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Si ya está, no hace nada y da una alerta
       alert("El producto ya está en el carrito!");
     }
-    // }
+    // }*/
   }
 
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/
@@ -59,7 +81,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   `;
   const imagenes = res1.data.images;
   document.getElementById("btnComprar").addEventListener("click", () => {
-    productCarrito(res1);
+    fetch(CART_INFO_URL,
+      {
+        headers: 
+        {
+          "access-token": localStorage.getItem("token"),
+        }
+      })
+    .then ((response)=>response.json())
+    .then((data)=>
+    {
+      let existe=false;
+      data.forEach(product=>
+      {
+        if(product.id==res1.data.id)
+        {
+          existe=true
+        }
+      });
+    if(!existe)
+    {
+      productCarrito(res1)
+    }
+    })
   });
 
   //(E4) Se crea una imagen del carrusel con "active" y el resto de las imagenes con un bucle for
