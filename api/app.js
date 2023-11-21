@@ -26,12 +26,8 @@ app.use(cors({ origin: "*" }));
 //Se crea el token en caso de haber introducido correctamente el usuario y contraseña
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
-  if (username === "admin" && password === "admin") {
-    const token = jwt.sign({ username }, secret_key);
-    res.status(200).json({ token });
-  } else {
-    res.status(401).json({ message: "Usuario y/o contraseña incorrecta" });
-  }
+  const token = jwt.sign({ username }, secret_key);
+  res.status(200).json({ token });
 });
 
 //Hacemos una validación del token

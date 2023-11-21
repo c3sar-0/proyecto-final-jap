@@ -91,8 +91,7 @@ async function loadCart() {
     const promesa = await fetch(url, {
       method: "GET",
       headers: {
-        "access-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAwNTg3Nzc1fQ.ePga1TU1V7_h88FRdUrhtOKJ-YiK25gjEIb12_Gvkik",
+        "access-token": localStorage.getItem("token"),
       },
     });
     if (promesa.ok) {

@@ -23,21 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return response.json();
       })
       .then((data) => {
-        if (data.status === "ok") {
-          localStorage.setItem("token", data.data);
-          window.location.href = "index.html";
-        } else {
-          alert("Credenciales incorrectas");
-        }
+        localStorage.setItem("token", data.token);
+        /*Funcion que almacenacena la información de que el usuario está logeado al enviar el formulario*/
+        localStorage.setItem("estaLogeado", true);
+        //Guardo el valor del mail en un item "correo"
+        localStorage.setItem("correo", mail.value);
+        // Guardamos la variable profile en el localStorage, que contiene la información del usuario (ahora solo contiene el email)
+        localStorage.setItem("profile", JSON.stringify({ email: mail.value }));
+        window.location.href = "index.html";
       });
   });
-
-  /*Funcion que almacenacena la información de que el usuario está logeado al enviar el formulario*/
-  localStorage.setItem("estaLogeado", true);
-  //Guardo el valor del mail en un item "correo"
-  localStorage.setItem("correo", mail.value);
-  // Guardamos la variable profile en el localStorage, que contiene la información del usuario (ahora solo contiene el email)
-  localStorage.setItem("profile", JSON.stringify({ email: mail.value }));
-  /*Redirección a la página de inicio luego del envío del formulario*/
-  window.location.href = "index.html";
 });
