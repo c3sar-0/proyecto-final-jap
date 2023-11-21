@@ -9,11 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const productInfo = localStorage.getItem("idProduc");
   let puntuacion = 0;
   const stars = document.querySelectorAll(".star");
-  const urlInfo = `https://japceibal.github.io/emercado-api/products/${productInfo}.json`;
-  const categoryUrl =
-    "https://japceibal.github.io/emercado-api/cats_products/" +
-    localStorage.getItem("catID") +
-    ".json";
+  const urlInfo = `${PRODUCT_INFO_URL}${productInfo}.json`;
 
   function productCarrito(compra) {
     // Creamos el producto a partir de la compra
@@ -120,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   //(E3)Accedemos al json de los comentarios
   //(E3)Con un forEach recorremos el array para poder mostrar los comentarios y puntajes de cada uno de los productos
-  const urlComments = `https://japceibal.github.io/emercado-api/products_comments/${productInfo}.json`;
+  const urlComments = `${PRODUCT_INFO_COMMENTS_URL}${productInfo}.json`;
   const res2 = await getJSONData(urlComments);
   divComentario.innerHTML += `
           <h4 id="tituloComentarios">Comentarios</h4>`;

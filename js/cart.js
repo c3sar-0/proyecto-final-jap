@@ -19,7 +19,7 @@ let total = 0;
 
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("products-container");
-  const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  const url = CART_INFO_URL;
 
   //(E5) busco los datos para trabajar con ellos
   const carrito = JSON.parse(localStorage.getItem("carrito"));

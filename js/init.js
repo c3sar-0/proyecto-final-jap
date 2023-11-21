@@ -1,12 +1,10 @@
-const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
-const PUBLISH_PRODUCT_URL =
-  "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL =
-  "https://japceibal.github.io/emercado-api/products_comments/";
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
-const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
+const CATEGORIES_URL = "http://localhost:3000/cats/";
+const PUBLISH_PRODUCT_URL = "http://localhost:3000/sell/publish/";
+const PRODUCTS_URL = "http://localhost:3000/cats_products/";
+const PRODUCT_INFO_URL = "http://localhost:3000/products/";
+const PRODUCT_INFO_COMMENTS_URL = "http://localhost:3000/products_comments/";
+const CART_INFO_URL = "http://localhost:3000/user_cart/";
+const CART_BUY_URL = "http://localhost:3000/cart/buy/";
 const EXT_TYPE = ".json";
 //localStorage.setItem('carrito',JSON.stringify([]));
 let showSpinner = function () {
@@ -87,12 +85,22 @@ function correoNav() {
 }
 
 async function loadCart() {
-  const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  const url = CART_INFO_URL;
   const carrito = localStorage.getItem("carrito");
   if (!carrito || JSON.parse(carrito).length == 0) {
-    const promesa = await fetch(url);
-    const datosCompra = await promesa.json();
-    localStorage.setItem("carrito", JSON.stringify(datosCompra.articles));
+    const promesa = await fetch(url, {
+      method: "GET",
+      headers: {
+        "access-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzAwNTg3Nzc1fQ.ePga1TU1V7_h88FRdUrhtOKJ-YiK25gjEIb12_Gvkik",
+      },
+    });
+    if (promesa.ok) {
+      const datosCompra = await promesa.json();
+      localStorage.setItem("carrito", JSON.stringify(datosCompra.articles));
+    } else {
+      console.log("error");
+    }
   }
 }
 
