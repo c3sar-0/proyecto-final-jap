@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td id="subTotal-${articulo.id}">${articulo.currency} ${
       articulo.unitCost * articulo.count
     }</td>
-        <td><button class="btn btn-light" id="${numProduct}" onclick="eliminarArt(id)">
+        <td><button type="button" class="btn btn-light" id="${numProduct}" onclick="eliminarArt(${articulo.id})">
         <span class="fas fa-trash"></span>
         </td>
       `;
@@ -166,10 +166,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function eliminarArt(id) {
-  let nuevaArray = JSON.parse(localStorage.getItem("carrito"));
-  nuevaArray.splice(id, 1);
+  fetch(CART_INFO_URL+id,
+    {
+      method:"DELETE",
+      headers: 
+      {
+        "access-token": localStorage.getItem("token"),
+      },
 
-  localStorage.setItem("carrito", JSON.stringify(nuevaArray));
+    })
   location.reload();
 }
 

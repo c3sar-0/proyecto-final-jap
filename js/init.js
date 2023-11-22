@@ -84,26 +84,6 @@ function correoNav() {
   }
 }
 
-async function loadCart() {
-  const url = CART_INFO_URL;
-  const carrito = localStorage.getItem("carrito");
-  if (!carrito || JSON.parse(carrito).length == 0) {
-    const promesa = await fetch(url, {
-      method: "GET",
-      headers: {
-        "access-token": localStorage.getItem("token"),
-      },
-    });
-    if (promesa.ok) {
-      const datosCompra = await promesa.json();
-      localStorage.setItem("carrito", JSON.stringify(datosCompra.articles));
-    } else {
-      console.log("error");
-    }
-  }
-}
-
-loadCart();
 correoNav();
 
 //(E4) Se llama por id al botón "cerrar sesion" del menú desplegable y al hacerle click se elminan
