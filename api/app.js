@@ -8,6 +8,8 @@ let userCart = require("./json/user_cart/25801.json");
 const jwt = require("jsonwebtoken");
 const secret_key = "clave secreta";
 
+const cartRouter = require("./router/cartRouter");
+
 const pool = mariadb.createPool({
   host: "localhost",
   user: "root",
@@ -30,6 +32,10 @@ app.post("/login", (req, res) => {
   res.status(200).json({ token });
 });
 
+app.get("/", (req, res) => {
+  res.send("<h1>Bienvenid@ al servidor</h1>");
+});
+
 //Hacemos una validación del token
 app.use("/user_cart", (req, res, next) => {
   try {
@@ -40,9 +46,82 @@ app.use("/user_cart", (req, res, next) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("<h1>Bienvenid@ al servidor</h1>");
-});
+app.use("/user_cart", cartRouter);
+
+// ### DB ### //
+
+// app.get("/user_cart", async (req, res) => {
+//   let conn;
+//   try {
+//     conn = await pool.getConnection();
+//     const response = await conn.query("SELECT * FROM carrito");
+//     res.status(201).json(response);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Server failed" });
+//   } finally {
+//     if (conn) conn.release(); //release to pool
+//   }
+// });
+
+// app.post("/user_cart", async (req, res) => {
+//   let conn;
+//   try {
+//     conn = await pool.getConnection();
+//     const response = await conn.query(
+//       "INSERT INTO carrito(id, unitCost, currency, name, count, image) VALUE(?, ?, ?, ?, ?,?)",
+//       [
+//         req.body.id,
+//         req.body.unitCost,
+//         req.body.currency,
+//         req.body.name,
+//         req.body.count,
+//         req.body.image,
+//       ]
+//     );
+//     res.status(201).json({ id: parseInt(response.insertId), ...req.body });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Server failed" });
+//   } finally {
+//     if (conn) conn.release(); //release to pool
+//   }
+// });
+
+// app.put("/user_cart/:id", async (req, res) => {
+//   let conn;
+//   try {
+//     conn = await pool.getConnection();
+//     const response = await conn.query("UPDATE carrito SET count=? WHERE id=?", [
+//       req.body.count,
+//       req.params.id,
+//     ]);
+//     res.status(201).json({ message: "valor modificado" });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Server failed" });
+//   } finally {
+//     if (conn) conn.release(); //release to pool
+//   }
+// });
+
+// app.delete("/user_cart/:id", async (req, res) => {
+//   let conn;
+//   try {
+//     conn = await pool.getConnection();
+//     const response = await conn.query("DELETE FROM carrito WHERE id=?", [
+//       req.params.id,
+//     ]);
+//     res.status(204).json({ message: "Elemento eliminado correctamente" });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ message: "Server failed" });
+//   } finally {
+//     if (conn) conn.release(); //release to pool
+//   }
+// });
+
+// ### JSON ### //
 
 app.get("/cart", async (req, res) => {
   res.json(cart);
@@ -98,98 +177,6 @@ app.get("/sell", async (req, res) => {
   res.json(sell);
 });
 
-app.get("/user_cart", async (req, res) => {
-
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const response = await conn.query(
-      "SELECT * FROM carrito"
-    );
-    
-    res.status(201).json(response);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server failed" });
-  } finally {
-    if (conn) conn.release(); //release to pool
-  }
-});
-
 app.listen(port, () => {
   console.log(`Servidor corriendo en http://localhost:${port}`);
-});
-
-app.post("/user_cart", async (req,res)=>
-{
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const response = await conn.query(
-      "INSERT INTO carrito(id, unitCost, currency, name, count, image) VALUE(?, ?, ?, ?, ?,?)",
-      [
-        req.body.id,
-        req.body.unitCost,
-        req.body.currency,
-        req.body.name,
-        req.body.count,
-        req.body.image,
-        
-      ]
-      
-    );
-    
-    res.status(201).json({ id: parseInt(response.insertId), ...req.body });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server failed" });
-  } finally {
-    if (conn) conn.release(); //release to pool
-  }
-});
-
-
-app.put("/user_cart/:id", async (req,res)=>
-{
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const response = await conn.query(
-      "UPDATE carrito SET count=? WHERE id=?",
-      [
-        req.body.count,
-        req.params.id
-      ]
-      
-    );
-    
-    res.status(201).json({ message:"valor modificado" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server failed" });
-  } finally {
-    if (conn) conn.release(); //release to pool
-  }
-});
-
-
-app.delete("/user_cart/:id", async (req,res)=>
-{
-  let conn;
-  try {
-    conn = await pool.getConnection();
-    const response = await conn.query(
-                                      "DELETE FROM carrito WHERE id=?",
-                                      [
-                                        req.params.id
-                                      ]
-                                    );
-    
-    res.status(204).json({message:"Elemento eliminado correctamente"});
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Server failed" });
-  } finally {
-    if (conn) conn.release(); //release to pool
-  }
 });

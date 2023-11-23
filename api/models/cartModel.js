@@ -2,97 +2,95 @@
 const mariadb = require("mariadb");
 
 const pool = mariadb.createPool({
-    host: "localhost",
-    user: "root",
-    password: "1234",
-    database: "e-comerce",
-    connectionLimit: 5,
+  host: "localhost",
+  user: "root",
+  password: "1234",
+  database: "e-comerce",
+  connectionLimit: 5,
 });
 
-const getUsers = async () => {
-    try {
-        const catProductos = await require(`./json/cats_products/${parseInt(
-          req.params.id
-        )}.json`);
-        return catProductos;
-      } catch (error) {
-        res.status(404).json({ message: "Categoría no encontrada" });
-      }
-};
-
-const getUserById = async (id) => {
+const getCart = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const rows = await conn.query(
-      "SELECT id, name, lastname, email FROM people WHERE id=?",
-      [id]
-    );
+    const response = await conn.query("SELECT * FROM carrito");
 
-    return rows[0];
+    return response;
   } catch (error) {
     console.log(error);
   } finally {
     if (conn) conn.release(); //release to pool
   }
+
   return false;
 };
 
-const createUser = async (user) => {
+const addToCart = async (product) => {
   let conn;
   try {
     conn = await pool.getConnection();
     const response = await conn.query(
-      `INSERT INTO people(name, lastname, email) VALUE(?, ?, ?)`,
-      [user.name, user.lastname, user.email]
+      "INSERT INTO carrito(id, unitCost, currency, name, count, image) VALUE(?, ?, ?, ?, ?,?)",
+      [
+        req.body.id,
+        req.body.unitCost,
+        req.body.currency,
+        req.body.name,
+        req.body.count,
+        req.body.image,
+      ]
     );
 
-    return { id: parseInt(response.insertId), ...user };
+    return { id: parseInt(response.insertId), ...req.body };
   } catch (error) {
     console.log(error);
   } finally {
     if (conn) conn.release(); //release to pool
   }
+
   return false;
 };
 
-const updateUser = async (id, user) => {
+const updateCart = async (count, id) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    await conn.query(
-      `UPDATE people SET name=?, lastname=?, email=? WHERE id=?`,
-      [user.name, user.lastname, user.email, id]
-    );
+    const response = await conn.query("UPDATE carrito SET count=? WHERE id=?", [
+      req.body.count,
+      req.params.id,
+    ]);
 
-    return { id, ...user };
+    return response;
   } catch (error) {
     console.log(error);
   } finally {
     if (conn) conn.release(); //release to pool
   }
+
   return false;
 };
 
-const deleteUser = async (id) => {
+const deleteCartProduct = async (id) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    await conn.query("DELETE FROM people WHERE id=?", [id]);
+    const response = await conn.query("DELETE FROM carrito WHERE id=?", [
+      req.params.id,
+    ]);
 
-    return true;
+    return response;
   } catch (error) {
     console.log(error);
   } finally {
     if (conn) conn.release(); //release to pool
   }
+
   return false;
 };
 
 module.exports = {
-  getUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
+  getCart,
+  addToCart,
+  updateCart,
+  deleteCartProduct,
 };
