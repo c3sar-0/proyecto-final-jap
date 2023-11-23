@@ -14,16 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const urlInfo = `${PRODUCT_INFO_URL}${productInfo}.json`;
 
   function productCarrito(compra) {
-    // Creamos el producto a partir de la compra
-   /* const producto = {
-      id: compra.data.id,
-      image: compra.data.images[0],
-      name: compra.data.name,
-      currency: compra.data.currency,
-      unitCost: compra.data.cost,
-      count: 1,
-    };*/
-
+    
     fetch(CART_INFO_URL, 
       {
         method: "POST",
@@ -43,19 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         "image": compra.data.images[0]
         })
       })
-
-    // Obtener carrito del localStorage
-   /* const products = JSON.parse(localStorage.getItem("carrito"));
-    const findProduct = products.find((p) => p.id == producto.id);
-    console.log(findProduct);
-    if (!findProduct) {
-      // Si no está, la agrega
-      localStorage.setItem("carrito", JSON.stringify([...products, producto]));
-    } else {
-      // Si ya está, no hace nada y da una alerta
-      alert("El producto ya está en el carrito!");
-    }
-    // }*/
   }
 
   /* (E3) con el JSONData accedemos ala información de cada producto y creamos el cuerpo del html*/

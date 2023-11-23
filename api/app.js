@@ -148,6 +148,31 @@ app.post("/user_cart", async (req,res)=>
   }
 });
 
+
+app.put("/user_cart/:id", async (req,res)=>
+{
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    const response = await conn.query(
+      "UPDATE carrito SET count=? WHERE id=?",
+      [
+        req.body.count,
+        req.params.id
+      ]
+      
+    );
+    
+    res.status(201).json({ message:"valor modificado" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server failed" });
+  } finally {
+    if (conn) conn.release(); //release to pool
+  }
+});
+
+
 app.delete("/user_cart/:id", async (req,res)=>
 {
   let conn;

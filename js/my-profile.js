@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const imgPerfil = document.getElementById("imgPerfil");
   imgPerfil.src =
     localStorage.getItem("profile_picture") ||
-    "/proyecto-final-jap/img/img_perfil.png";
+    "./img/img_perfil.png";
 
   primerNombre.value = profile.primerNombre || "";
   segundoNombre.value = profile.segundoNombre || "";
