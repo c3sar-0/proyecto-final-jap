@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td id="subTotal-${articulo.id}">${articulo.currency} ${
       articulo.unitCost * articulo.count
     }</td>
-        <td><button class="btn btn-light" id="${numProduct}" onclick="eliminarArt(id)">
+        <td><button type="button" class="btn btn-light" id="${numProduct}" onclick="eliminarArt(id)">
         <span class="fas fa-trash"></span>
         </td>
       `;
