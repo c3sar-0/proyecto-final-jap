@@ -1,0 +1,124 @@
+/* Delimiter changed to ; */
+/* Connecting to 127.0.0.1 via MariaDB or MySQL (TCP/IP), username root, using password: No ... */
+/* Access denied for user 'root'@'localhost' (using password: NO) */
+/* Connecting to 127.0.0.1 via MariaDB or MySQL (TCP/IP), username root, using password: Yes ... */
+SELECT CONNECTION_ID();
+SHOW VARIABLES;
+/* Characterset: utf8mb4 */
+SHOW /*!50002 GLOBAL */ STATUS;
+SELECT NOW();
+/* Connected. Thread-ID: 6 */
+/* Reading function definitions from C:\Program Files (x86)\Common Files\MariaDBShared\HeidiSQL\functions-mariadb.ini */
+SHOW TABLES FROM `information_schema`;
+SHOW DATABASES;
+SHOW OPEN TABLES FROM blog WHERE `in_use`!=0;
+USE `blog`;
+/* Entering session "Unnamed" */
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='blog';
+SHOW TABLE STATUS FROM `blog`;
+SHOW FUNCTION STATUS WHERE `Db`='blog';
+SHOW PROCEDURE STATUS WHERE `Db`='blog';
+SHOW TRIGGERS FROM `blog`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='blog';
+/* Scaling controls to screen DPI: 100% */
+SHOW COLLATION;
+SHOW VARIABLES;
+CREATE DATABASE `proyecto-final-jap` /*!40100 COLLATE 'latin1_swedish_ci' */;
+SHOW DATABASES;
+/* Entering session "Unnamed" */
+USE `proyecto-final-jap`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='proyecto-final-jap';
+SHOW TABLE STATUS FROM `proyecto-final-jap`;
+SHOW FUNCTION STATUS WHERE `Db`='proyecto-final-jap';
+SHOW PROCEDURE STATUS WHERE `Db`='proyecto-final-jap';
+SHOW TRIGGERS FROM `proyecto-final-jap`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='proyecto-final-jap';
+SHOW ENGINES;
+SHOW VARIABLES;
+/* #58: Access violation at address 00010000. Execution of address 00010000 Message CharCode:13 Msg:256 */
+/* #86: Access violation at address 00010000. Execution of address 00010000 Message CharCode:13 Msg:256 */
+/* #66: Access violation at address 00010000. Execution of address 00010000 Message CharCode:13 Msg:256 */
+/* #72: Access violation at address 00010000. Execution of address 00010000 Message CharCode:13 Msg:256 */
+/* #41: Access violation at address 00010000. Execution of address 00010000 Message CharCode:13 Msg:256 */
+CREATE TABLE `carrito` (
+	`id` INT NOT NULL,
+	`unitCost` INT NOT NULL,
+	`currency` CHAR(50) NOT NULL DEFAULT '',
+	`name` INT NOT NULL,
+	`count` INT NOT NULL,
+	`image` TEXT NOT NULL
+)
+COLLATE='latin1_swedish_ci'
+;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='proyecto-final-jap';
+SHOW TABLE STATUS FROM `proyecto-final-jap`;
+SHOW FUNCTION STATUS WHERE `Db`='proyecto-final-jap';
+SHOW PROCEDURE STATUS WHERE `Db`='proyecto-final-jap';
+SHOW TRIGGERS FROM `proyecto-final-jap`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='proyecto-final-jap';
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='proyecto-final-jap' AND TABLE_NAME='carrito' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `carrito` FROM `proyecto-final-jap`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='proyecto-final-jap'   AND TABLE_NAME='carrito'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='proyecto-final-jap'   AND TABLE_NAME='carrito'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW CREATE TABLE `proyecto-final-jap`.`carrito`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='proyecto-final-jap' AND TABLE_NAME='carrito';
+/* Entering session "Unnamed" */
+SHOW CREATE TABLE `proyecto-final-jap`.`carrito`;
+ALTER TABLE `carrito`
+	CHANGE COLUMN `name` `name` VARCHAR(50) NOT NULL DEFAULT '' AFTER `currency`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='proyecto-final-jap';
+SHOW TABLE STATUS FROM `proyecto-final-jap`;
+SHOW FUNCTION STATUS WHERE `Db`='proyecto-final-jap';
+SHOW PROCEDURE STATUS WHERE `Db`='proyecto-final-jap';
+SHOW TRIGGERS FROM `proyecto-final-jap`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='proyecto-final-jap';
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='proyecto-final-jap' AND TABLE_NAME='carrito' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `carrito` FROM `proyecto-final-jap`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='proyecto-final-jap'   AND TABLE_NAME='carrito'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='proyecto-final-jap'   AND TABLE_NAME='carrito'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW CREATE TABLE `proyecto-final-jap`.`carrito`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='proyecto-final-jap' AND TABLE_NAME='carrito';
+/* Entering session "Unnamed" */
+SHOW CREATE TABLE `proyecto-final-jap`.`carrito`;
+SHOW CREATE DATABASE `proyecto-final-jap`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='proyecto-final-jap';
+SHOW TABLE STATUS FROM `proyecto-final-jap`;
+SHOW FUNCTION STATUS WHERE `Db`='proyecto-final-jap';
+SHOW PROCEDURE STATUS WHERE `Db`='proyecto-final-jap';
+SHOW TRIGGERS FROM `proyecto-final-jap`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='proyecto-final-jap';
+SHOW DATABASES;
+CREATE DATABASE `e-commerce` /*!40100 COLLATE 'latin1_swedish_ci' */;
+RENAME TABLE `proyecto-final-jap`.`carrito` TO `e-commerce`.`carrito`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='proyecto-final-jap';
+SHOW TABLE STATUS FROM `proyecto-final-jap`;
+SHOW FUNCTION STATUS WHERE `Db`='proyecto-final-jap';
+SHOW PROCEDURE STATUS WHERE `Db`='proyecto-final-jap';
+SHOW TRIGGERS FROM `proyecto-final-jap`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='proyecto-final-jap';
+DROP DATABASE `proyecto-final-jap`;
+SHOW DATABASES;
+/* Entering session "Unnamed" */
+SHOW DATABASES;
+/* Entering session "Unnamed" */
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='';
+SHOW TABLE STATUS FROM ``;
+/* SQL Error (1102): Incorrect database name '' */
+SHOW FUNCTION STATUS WHERE `Db`='';
+SHOW PROCEDURE STATUS WHERE `Db`='';
+SHOW TRIGGERS FROM ``;
+/* SQL Error (1102): Incorrect database name '' */
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='';
+USE `e-commerce`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='e-commerce';
+SHOW TABLE STATUS FROM `e-commerce`;
+SHOW FUNCTION STATUS WHERE `Db`='e-commerce';
+SHOW PROCEDURE STATUS WHERE `Db`='e-commerce';
+SHOW TRIGGERS FROM `e-commerce`;
+SELECT *, EVENT_SCHEMA AS `Db`, EVENT_NAME AS `Name` FROM information_schema.`EVENTS` WHERE `EVENT_SCHEMA`='e-commerce';
+SELECT * FROM `information_schema`.`COLUMNS` WHERE TABLE_SCHEMA='e-commerce' AND TABLE_NAME='carrito' ORDER BY ORDINAL_POSITION;
+SHOW INDEXES FROM `carrito` FROM `e-commerce`;
+SELECT * FROM information_schema.REFERENTIAL_CONSTRAINTS WHERE   CONSTRAINT_SCHEMA='e-commerce'   AND TABLE_NAME='carrito'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SELECT * FROM information_schema.KEY_COLUMN_USAGE WHERE   TABLE_SCHEMA='e-commerce'   AND TABLE_NAME='carrito'   AND REFERENCED_TABLE_NAME IS NOT NULL;
+SHOW CREATE TABLE `e-commerce`.`carrito`;
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE FROM `information_schema`.`CHECK_CONSTRAINTS` WHERE CONSTRAINT_SCHEMA='e-commerce' AND TABLE_NAME='carrito';
