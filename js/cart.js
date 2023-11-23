@@ -1,3 +1,4 @@
+
 //(E6)
 const precioSubTotal = document.getElementById("sub");
 const precioEnvio = document.getElementById("costEnvio");
@@ -32,7 +33,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   const datosCompra = await promesa.json();
   products = datosCompra;
-  console.log(products);
   /*(E5)se crea una estructura prototipo con id para usarlos en el evento "input"*/
   let numProduct = 0;
   products.forEach((articulo) => {
@@ -44,6 +44,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     input.setAttribute("min", 0);
     input.setAttribute("required", true);
     input.addEventListener("change", (e) => {
+      fetch(CART_INFO_URL+articulo.id,
+      {
+        method:"PUT",
+        headers: 
+      {
+        "access-token": localStorage.getItem("token"),
+        "Content-Type": "application/json"
+      },
+      body:
+      JSON.stringify({
+        "count": input.value
+      })
+      });
       const subTotalElem = document.getElementById(`subTotal-${articulo.id}`);
       subTotalElem.innerHTML =
         articulo.currency + " " + articulo.unitCost * e.target.value;
@@ -61,9 +74,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
       //------------
 
-      const productIndex = carrito.findIndex((p) => p.id == articulo.id);
-      carrito[productIndex].count = e.target.value;
-      localStorage.setItem("carrito", JSON.stringify(carrito));
     });
 
     const row = document.createElement("tr", { id: "Art" + articulo.id });
