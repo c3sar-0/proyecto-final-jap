@@ -1,8 +1,5 @@
 /*(E1)Se crea una constante con el link donde se va a realizar el fetch*/
-const carCategoryUrl =
-  "https://japceibal.github.io/emercado-api/cats_products/" +
-  localStorage.getItem("catID") +
-  ".json";
+const carCategoryUrl = PRODUCTS_URL + localStorage.getItem("catID") + ".json";
 
 /*(E1)Se crea una constante para tomar a la etiqueta*/
 const carsContainer = document.getElementById("cars-container");

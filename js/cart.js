@@ -19,19 +19,20 @@ let total = 0;
 
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("products-container");
-  const url = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  const url = CART_INFO_URL;
 
   //(E5) busco los datos para trabajar con ellos
-  const carrito = JSON.parse(localStorage.getItem("carrito"));
   let products;
-  if (!carrito) {
-    const promesa = await fetch(url);
-    const datosCompra = await promesa.json();
-    products = datosCompra.articles;
-  } else {
-    products = carrito;
-  }
-
+  const promesa = await fetch(url,
+    {
+      headers: 
+      {
+        "access-token": localStorage.getItem("token"),
+      }
+    });
+  const datosCompra = await promesa.json();
+  products = datosCompra;
+  console.log(products);
   /*(E5)se crea una estructura prototipo con id para usarlos en el evento "input"*/
   let numProduct = 0;
   products.forEach((articulo) => {
@@ -78,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td id="subTotal-${articulo.id}">${articulo.currency} ${
       articulo.unitCost * articulo.count
     }</td>
-        <td><button class="btn btn-light" id="${numProduct}" onclick="eliminarArt(id)">
+        <td><button type="button" class="btn btn-light" id="${numProduct}" onclick="eliminarArt(${articulo.id})">
         <span class="fas fa-trash"></span>
         </td>
       `;
@@ -165,10 +166,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function eliminarArt(id) {
-  let nuevaArray = JSON.parse(localStorage.getItem("carrito"));
-  nuevaArray.splice(id, 1);
+  fetch(CART_INFO_URL+id,
+    {
+      method:"DELETE",
+      headers: 
+      {
+        "access-token": localStorage.getItem("token"),
+      },
 
-  localStorage.setItem("carrito", JSON.stringify(nuevaArray));
+    })
   location.reload();
 }
 
