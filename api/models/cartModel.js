@@ -5,7 +5,7 @@ const pool = mariadb.createPool({
   host: "localhost",
   user: "root",
   password: "1234",
-  database: "e-comerce",
+  database: "e-commerce",
   connectionLimit: 5,
 });
 
@@ -32,16 +32,16 @@ const addToCart = async (product) => {
     const response = await conn.query(
       "INSERT INTO carrito(id, unitCost, currency, name, count, image) VALUE(?, ?, ?, ?, ?,?)",
       [
-        req.body.id,
-        req.body.unitCost,
-        req.body.currency,
-        req.body.name,
-        req.body.count,
-        req.body.image,
+        product.id,
+        product.unitCost,
+        product.currency,
+        product.name,
+        product.count,
+        product.image,
       ]
     );
 
-    return { id: parseInt(response.insertId), ...req.body };
+    return { id: parseInt(response.insertId), ...product };
   } catch (error) {
     console.log(error);
   } finally {
@@ -56,8 +56,8 @@ const updateCart = async (count, id) => {
   try {
     conn = await pool.getConnection();
     const response = await conn.query("UPDATE carrito SET count=? WHERE id=?", [
-      req.body.count,
-      req.params.id,
+      count,
+      id,
     ]);
 
     return response;
@@ -74,9 +74,7 @@ const deleteCartProduct = async (id) => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const response = await conn.query("DELETE FROM carrito WHERE id=?", [
-      req.params.id,
-    ]);
+    const response = await conn.query("DELETE FROM carrito WHERE id=?", [id]);
 
     return response;
   } catch (error) {

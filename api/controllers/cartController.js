@@ -1,5 +1,5 @@
 // Importamos los models necesarios
-const peopleModel = require("../models/cartModel");
+const cartModel = require("../models/cartModel");
 
 const getCart = async (req, res) => {
   const cart = await cartModel.getCart(req.params.id);
