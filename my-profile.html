@@ -136,21 +136,20 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" class="form-control mt-1 mb-4" id="email" />
+                    <label for="email">E-mail*</label>
+                    <input type="email" class="form-control mt-1 mb-4" id="email" required/>
+                    <div class="invalid-feedback">Ingrese el mail ya registrado</div>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="telefono">Teléfono de contacto*</label>
+                    <label for="telefono">Teléfono de contacto</label>
                     <input
                       type="text"
                       class="form-control mt-1 mb-4"
                       id="telefono"
                       pattern="[0-9]+"
-                      required
                     />
-                    <div class="invalid-feedback">Ingresa un teléfono</div>
                   </div>
                 </div>
                 <div class="col-sm-6">
